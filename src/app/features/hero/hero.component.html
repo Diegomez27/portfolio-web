@@ -1,0 +1,46 @@
+<section class="hero section">
+  <div class="container hero__container">
+
+    <!-- Badge de credibilidad -->
+    <div class="hero__badge animate-fade-in-up">
+      <span class="hero__badge-dot"></span>
+      40+ clientes corporativos activos
+    </div>
+
+    <!-- Headline -->
+    <h1 class="hero__headline animate-fade-in-up">
+      Sistemas web empresariales<br>
+      que <span class="gradient-text">cumplen, reportan y escalan</span>
+    </h1>
+
+    <!-- Subheadline -->
+    <p class="hero__sub animate-fade-in-up">
+      Desarrollo plataformas a la medida con Angular y NestJS —
+      desde landing pages hasta sistemas fiscales multi-tenant.
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero__ctas animate-fade-in-up">
+      <button class="btn btn--primary" (click)="scrollToContact()">
+        Agendar llamada
+      </button>
+      <button class="btn btn--outline" (click)="scrollToDemos()">
+        Ver demos en vivo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Stack chips -->
+    <div class="hero__chips animate-fade-in-up">
+      @for (chip of stackChips; track chip) {
+        <span class="chip">{{ chip }}</span>
+      }
+    </div>
+
+    <!-- Decorative gradient blob -->
+    <div class="hero__blob" aria-hidden="true"></div>
+
+  </div>
+</section>

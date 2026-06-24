@@ -1,0 +1,109 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding-block: 1rem;
+  transition: background-color 200ms ease, backdrop-filter 200ms ease, box-shadow 200ms ease;
+
+  &--scrolled {
+    background-color: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 var(--color-border);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__logo {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+
+    &-mark { color: var(--color-accent-light); }
+    &-name { color: var(--color-text); }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: auto;
+
+    @media (max-width: 768px) { display: none; }
+  }
+
+  &__link {
+    padding: 0.5rem 0.875rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--transition), background-color var(--transition);
+
+    &:hover {
+      color: var(--color-text);
+      background-color: var(--color-surface);
+    }
+  }
+
+  &__cta {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1.125rem;
+    font-size: 0.875rem;
+
+    @media (max-width: 768px) { display: none; }
+  }
+
+  &__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 2rem;
+    height: 2rem;
+    margin-left: auto;
+
+    span {
+      display: block;
+      height: 2px;
+      background: var(--color-text);
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+    }
+
+    @media (max-width: 768px) { display: flex; }
+  }
+
+  &__mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem var(--container-px) 1.5rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    animation: fadeIn 150ms ease;
+  }
+
+  &__mobile-link {
+    padding: 0.875rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-align: left;
+    transition: color var(--transition), background-color var(--transition);
+
+    &:hover {
+      color: var(--color-text);
+      background: var(--color-surface-2);
+    }
+  }
+}

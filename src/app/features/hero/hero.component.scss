@@ -1,0 +1,106 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: calc(var(--section-py) + 4rem); // offset navbar
+  text-align: center;
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    background: var(--color-accent-dim);
+    border: 1px solid rgba(108, 99, 255, 0.3);
+    color: var(--color-accent-light);
+    margin-bottom: 2rem;
+    animation-delay: 0ms;
+  }
+
+  &__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-success);
+    box-shadow: 0 0 8px var(--color-success);
+    animation: pulse 2s ease infinite;
+  }
+
+  &__headline {
+    font-family: var(--font-heading);
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 16ch;
+    margin-bottom: 1.5rem;
+    animation-delay: 100ms;
+  }
+
+  &__sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--color-text-muted);
+    max-width: 52ch;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    animation-delay: 200ms;
+  }
+
+  &__ctas {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    animation-delay: 300ms;
+  }
+
+  &__chips {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation-delay: 400ms;
+  }
+
+  &__blob {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, rgba(108, 99, 255, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+// Staggered animation delays
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+
+  &:nth-child(1) { animation-delay: 0ms; }
+  &:nth-child(2) { animation-delay: 100ms; }
+  &:nth-child(3) { animation-delay: 200ms; }
+  &:nth-child(4) { animation-delay: 300ms; }
+  &:nth-child(5) { animation-delay: 400ms; }
+}

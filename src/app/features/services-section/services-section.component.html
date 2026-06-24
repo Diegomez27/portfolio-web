@@ -1,0 +1,25 @@
+<section id="servicios" class="section services">
+  <div class="container">
+    <span class="section-label">Servicios</span>
+    <h2 class="section-title">¿Qué puedo construir para ti?</h2>
+    <p class="section-subtitle">
+      Desde un sitio de presentación hasta una plataforma empresarial compleja.
+      Cada proyecto con el mismo estándar de calidad y atención al detalle.
+    </p>
+
+    <div class="services__grid">
+      @for (service of services; track service.title) {
+        <article class="card services__card">
+          <div class="services__icon">{{ service.icon }}</div>
+          <h3 class="services__card-title">{{ service.title }}</h3>
+          <p class="services__card-desc">{{ service.description }}</p>
+          <div class="services__tags">
+            @for (tag of service.tags; track tag) {
+              <span class="chip">{{ tag }}</span>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
