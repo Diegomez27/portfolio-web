@@ -39,5 +39,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Environment (never commit production secrets)
-src/environments/environment.prod.ts
+.agents
+.claude
