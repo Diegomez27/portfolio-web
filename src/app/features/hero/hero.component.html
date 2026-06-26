@@ -1,46 +1,65 @@
-<section class="hero section">
-  <div class="container hero__container">
-
-    <!-- Badge de credibilidad -->
-    <div class="hero__badge animate-fade-in-up">
-      <span class="hero__badge-dot"></span>
-      40+ clientes corporativos activos
-    </div>
-
-    <!-- Headline -->
-    <h1 class="hero__headline animate-fade-in-up">
-      Sistemas web empresariales<br>
-      que <span class="gradient-text">cumplen, reportan y escalan</span>
+<section class="hero" [class.ready]="ready()">
+  <!-- Columna izquierda -->
+  <div class="hero__left">
+    <h1 class="hero__title">
+      Hola, soy Diego. Desarrollador <em>full-stack</em>.
     </h1>
 
-    <!-- Subheadline -->
-    <p class="hero__sub animate-fade-in-up">
-      Desarrollo plataformas a la medida con Angular y NestJS —
-      desde landing pages hasta sistemas fiscales multi-tenant.
+    <p class="hero__sub">
+      Diseño y construyo aplicaciones con <strong>Angular</strong> y
+      <strong>NestJS</strong> — interfaces rápidas, APIs bien tipadas y bases de
+      datos sólidas.
     </p>
 
-    <!-- CTAs -->
-    <div class="hero__ctas animate-fade-in-up">
-      <button class="btn btn--primary" (click)="scrollToContact()">
-        Agendar llamada
-      </button>
-      <button class="btn btn--outline" (click)="scrollToDemos()">
-        Ver demos en vivo
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
+    <div class="hero__stack">
+      <span class="hero__stack-label mono-label">Stack</span>
+      <div class="hero__stack-logos">
+        @for (t of stack; track t.name) {
+          <span class="tech" [title]="t.name">
+            <img class="tech__logo" [src]="t.logo" [alt]="t.name"
+                 width="22" height="22" loading="lazy">
+            <span class="tech__name">{{ t.name }}</span>
+          </span>
+        }
+      </div>
+    </div>
+
+    <div class="hero__ctas">
+      <button class="btn btn--accent" appMagnetic (click)="nav.go('work')">
+        Ver el trabajo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       </button>
+      <button class="btn btn--outline" (click)="nav.go('contact')">
+        Agendar llamada
+      </button>
     </div>
+  </div>
 
-    <!-- Stack chips -->
-    <div class="hero__chips animate-fade-in-up">
-      @for (chip of stackChips; track chip) {
-        <span class="chip">{{ chip }}</span>
+  <!-- Columna derecha: diagrama de arquitectura (solo desktop) -->
+  <div class="hero__right" aria-hidden="true">
+    <div class="diagram" [appParallax]="10">
+      <span class="diagram__label mono-label">// arquitectura · región mx-central</span>
+
+      <div class="diagram__stack">
+        @for (t of tiers; track t.name) {
+          <div class="tier">
+            <span class="live-dot"></span>
+            <div class="tier__text">
+              <strong>{{ t.name }}</strong>
+              <span class="mono-label">{{ t.tech }}</span>
+            </div>
+          </div>
+        }
+      </div>
+
+      @for (chip of chips; track chip; let i = $index) {
+        <span class="diagram__chip pill" [class]="'c' + i" [appParallax]="18 + i * 4">
+          {{ chip }}
+        </span>
       }
     </div>
-
-    <!-- Decorative gradient blob -->
-    <div class="hero__blob" aria-hidden="true"></div>
-
   </div>
 </section>

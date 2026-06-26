@@ -1,0 +1,35 @@
+<div class="shell" appCursorRing>
+  <!-- RAIL DE NAVEGACIÓN -->
+  <aside class="rail">
+    <div class="brand">
+      <strong>Diego Gómez</strong>
+      <span class="mono-label">Full-Stack Developer</span>
+    </div>
+
+    <nav>
+      @for (c of chapters; track c.id) {
+        <button
+          class="nav-row"
+          [class.active]="nav.active() === c.id"
+          (click)="nav.go(c.id)">
+          <span class="bar"></span>
+          <span class="num">{{ c.num }}</span>
+          <span class="label">{{ c.label }}</span>
+        </button>
+      }
+    </nav>
+
+    <div class="status">
+      <span class="live-dot"></span>
+      <span class="mono-label">Disponible para proyectos</span>
+    </div>
+  </aside>
+
+  <!-- ÁREA DE CONTENIDO: scroll real + snap por sección -->
+  <main class="scroller" #scroller>
+    <section id="home" class="view"><app-hero /></section>
+    <section id="work" class="view"><app-demos-section /></section>
+    <section id="services" class="view"><app-services-section /></section>
+    <section id="contact" class="view"><app-contact-section /></section>
+  </main>
+</div>

@@ -1,19 +1,7 @@
 import { Routes } from '@angular/router';
 
+// La navegación ahora es por capítulos (ChapterService), no por URL.
+// Se mantiene el router para el redirect catch-all.
 export const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () =>
-      import('./features/home/home.component').then((m) => m.HomeComponent),
-  },
-  // Rutas futuras (lazy-loaded)
-  // {
-  //   path: 'demos',
-  //   loadComponent: () =>
-  //     import('./features/demos/demos.component').then((m) => m.DemosComponent),
-  // },
-  {
-    path: '**',
-    redirectTo: '',
-  },
+  { path: '**', redirectTo: '' },
 ];

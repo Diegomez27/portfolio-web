@@ -1,95 +1,89 @@
-<section id="contacto" class="section contact">
-  <div class="container contact__inner">
+<div class="contact">
+  <!-- Izquierda: info + enlaces -->
+  <div class="contact__info">
+    <span class="contact__kicker mono-label">04 / Contacto</span>
+    <h2 class="contact__title">¿Tienes un sistema en mente?</h2>
+    <p class="contact__lead">
+      Cuéntame qué quieres construir.
+    </p>
 
-    <!-- Left: copy -->
-    <div class="contact__copy">
-      <span class="section-label">Contacto</span>
-      <h2 class="section-title">¿Tienes un proyecto en mente?</h2>
-      <p class="section-subtitle">
-        Cuéntame qué necesitas. Respondo en menos de 24 horas.
-      </p>
-
-      <a
-        class="contact__whatsapp"
-        href="https://wa.me/52TUNUMERO?text=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.029 18.88a9.837 9.837 0 01-4.702-1.195L3 18l1.347-4.227A9.865 9.865 0 012.13 12.03C2.13 6.554 6.553 2.13 12.03 2.13c2.637 0 5.115 1.027 6.978 2.892a9.836 9.836 0 012.892 6.979c-.003 5.476-4.426 9.879-9.871 9.879z"/>
-        </svg>
-        Hablar por WhatsApp
-      </a>
-    </div>
-
-    <!-- Right: form -->
-    <div class="contact__form-wrap">
-      @if (formState() === 'success') {
-        <div class="contact__success">
-          <span class="contact__success-icon">✅</span>
-          <h3>¡Mensaje enviado!</h3>
-          <p>Te responderé pronto. Mientras tanto, también puedes escribirme por WhatsApp.</p>
-        </div>
-      } @else {
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contact__form" novalidate>
-
-          <div class="form-row">
-            <div class="form-field" [class.form-field--error]="isInvalid('name')">
-              <label for="name">Nombre</label>
-              <input id="name" type="text" formControlName="name" placeholder="Tu nombre" autocomplete="name">
-              @if (isInvalid('name')) {
-                <span class="form-error">Nombre requerido (mínimo 2 caracteres)</span>
-              }
-            </div>
-
-            <div class="form-field" [class.form-field--error]="isInvalid('email')">
-              <label for="email">Correo electrónico</label>
-              <input id="email" type="email" formControlName="email" placeholder="tu@empresa.com" autocomplete="email">
-              @if (isInvalid('email')) {
-                <span class="form-error">Correo inválido</span>
-              }
-            </div>
-          </div>
-
-          <div class="form-field" [class.form-field--error]="isInvalid('projectType')">
-            <label for="projectType">Tipo de proyecto</label>
-            <select id="projectType" formControlName="projectType">
-              <option value="" disabled>Selecciona una opción</option>
-              @for (type of projectTypes; track type) {
-                <option [value]="type">{{ type }}</option>
-              }
-            </select>
-            @if (isInvalid('projectType')) {
-              <span class="form-error">Selecciona un tipo de proyecto</span>
-            }
-          </div>
-
-          <div class="form-field" [class.form-field--error]="isInvalid('message')">
-            <label for="message">Cuéntame de tu proyecto</label>
-            <textarea id="message" formControlName="message" rows="5" placeholder="Describe el sistema que necesitas, tu industria, plazos, etc."></textarea>
-            @if (isInvalid('message')) {
-              <span class="form-error">Mensaje requerido (mínimo 20 caracteres)</span>
-            }
-          </div>
-
-          @if (formState() === 'error') {
-            <p class="contact__server-error">
-              Hubo un error al enviar. Por favor escríbeme directamente por WhatsApp.
-            </p>
-          }
-
-          <button
-            type="submit"
-            class="btn btn--primary contact__submit"
-            [disabled]="formState() === 'submitting'"
-          >
-            {{ formState() === 'submitting' ? 'Enviando...' : 'Enviar mensaje' }}
-          </button>
-
-        </form>
+    <ul class="links">
+      @for (l of links; track l.kind) {
+        <li>
+          <a [href]="l.href" target="_blank" rel="noopener" class="link">
+            <span class="link__icon">{{ l.kind.charAt(0) }}</span>
+            <span class="link__text">
+              <span class="link__label mono-label">{{ l.kind }}</span>
+              <span class="link__value">{{ l.value }}</span>
+            </span>
+            <span class="link__arrow">↗</span>
+          </a>
+        </li>
       }
-    </div>
-
+    </ul>
   </div>
-</section>
+
+  <!-- Derecha: formulario -->
+  <div class="contact__form-wrap">
+    @if (formState() === 'success') {
+      <div class="contact__success">
+        <span class="contact__success-icon">✓</span>
+        <h3>¡Mensaje enviado!</h3>
+        <p>Gracias por escribir. Te responderé muy pronto.</p>
+      </div>
+    } @else {
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" novalidate>
+        <div class="field" [class.field--error]="isInvalid('name')">
+          <label for="name" class="mono-label">Nombre</label>
+          <input id="name" type="text" formControlName="name"
+                 placeholder="Tu nombre" autocomplete="name">
+          @if (isInvalid('name')) {
+            <span class="field__error">Nombre requerido (mínimo 2 caracteres)</span>
+          }
+        </div>
+
+        <div class="field" [class.field--error]="isInvalid('email')">
+          <label for="email" class="mono-label">Correo</label>
+          <input id="email" type="email" formControlName="email"
+                 placeholder="tu@empresa.com" autocomplete="email">
+          @if (isInvalid('email')) {
+            <span class="field__error">Correo inválido</span>
+          }
+        </div>
+
+        <div class="field" [class.field--error]="isInvalid('projectType')">
+          <label for="projectType" class="mono-label">Tipo de proyecto</label>
+          <select id="projectType" formControlName="projectType">
+            <option value="" disabled>Selecciona una opción</option>
+            @for (type of projectTypes; track type) {
+              <option [value]="type">{{ type }}</option>
+            }
+          </select>
+          @if (isInvalid('projectType')) {
+            <span class="field__error">Selecciona un tipo de proyecto</span>
+          }
+        </div>
+
+        <div class="field" [class.field--error]="isInvalid('message')">
+          <label for="message" class="mono-label">¿Qué quieres construir?</label>
+          <textarea id="message" formControlName="message" rows="5"
+                    placeholder="Describe el sistema, tu industria, plazos, etc."></textarea>
+          @if (isInvalid('message')) {
+            <span class="field__error">Mensaje requerido (mínimo 20 caracteres)</span>
+          }
+        </div>
+
+        @if (formState() === 'error') {
+          <p class="form__server-error">
+            Hubo un error al enviar. Intenta de nuevo o escríbeme por correo.
+          </p>
+        }
+
+        <button type="submit" class="btn btn--ink form__submit"
+                [disabled]="formState() === 'submitting'">
+          {{ formState() === 'submitting' ? 'Enviando…' : 'Enviar mensaje →' }}
+        </button>
+      </form>
+    }
+  </div>
+</div>

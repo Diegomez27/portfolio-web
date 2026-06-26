@@ -1,15 +1,23 @@
 import { Component, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { ContactService } from '../../core/services/contact.service';
-import { finalize } from 'rxjs';
+import {
+  ContactService,
+  ContactPayload,
+} from '../../core/services/contact.service';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
+
+interface ContactLink {
+  kind: string;
+  label: string;
+  value: string;
+  href: string;
+}
 
 @Component({
   selector: 'app-contact-section',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './contact-section.component.html',
   styleUrl: './contact-section.component.scss',
 })
@@ -34,6 +42,27 @@ export class ContactSectionComponent {
     'Otro',
   ];
 
+  readonly links: ContactLink[] = [
+    {
+      kind: 'Email',
+      label: 'Escríbeme',
+      value: 'diegomez27@outlook.com',
+      href: 'mailto:diegomez27@outlook.com',
+    },
+    {
+      kind: 'GitHub',
+      label: 'Código',
+      value: 'github.com/Diegomez27',
+      href: 'https://github.com/Diegomez27',
+    },
+    {
+      kind: 'LinkedIn',
+      label: 'Perfil',
+      value: 'linkedin.com/in/diego-gomez',
+      href: 'https://www.linkedin.com/in/diego-alejandro-g%C3%B3mez-serrano-9abbb038a/',
+    },
+  ];
+
   isInvalid(field: string): boolean {
     const ctrl = this.form.get(field);
     return !!(ctrl?.invalid && ctrl?.touched);
@@ -47,19 +76,22 @@ export class ContactSectionComponent {
 
     this.formState.set('submitting');
 
-    this.contactService
-      .send(this.form.value as never)
-      .pipe(finalize(() => {
-        // finalize runs whether success or error
-      }))
-      .subscribe({
-        next: () => {
-          this.formState.set('success');
-          this.form.reset();
-        },
-        error: () => {
-          this.formState.set('error');
-        },
-      });
+    const { name, email, projectType, message } = this.form.getRawValue();
+    const payload: ContactPayload = {
+      name: name ?? '',
+      email: email ?? '',
+      projectType: projectType ?? '',
+      message: message ?? '',
+    };
+
+    this.contactService.send(payload).subscribe({
+      next: () => {
+        this.formState.set('success');
+        this.form.reset();
+      },
+      error: () => {
+        this.formState.set('error');
+      },
+    });
   }
 }

@@ -1,0 +1,60 @@
+.work {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.work__head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.work__kicker { color: var(--accent); }
+.work__title { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+.work__lead {
+  color: var(--muted);
+  max-width: 56ch;
+  strong { color: var(--ink); font-weight: 600; }
+}
+
+// ── Estado coming soon ──────────────────────────
+.soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: clamp(40px, 8vw, 80px) 24px;
+  background: var(--panel);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-panel);
+}
+
+.soon__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+}
+
+.soon__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: dgPulseDot 1.6s ease-in-out infinite;
+}
+
+@keyframes dgPulseDot {
+  0%, 100% { opacity: 1;   transform: scale(1);   }
+  50%      { opacity: 0.4; transform: scale(0.8); }
+}
+
+.soon__title { font-size: clamp(1.4rem, 2.6vw, 2rem); }
+.soon__text { color: var(--muted); max-width: 44ch; }
