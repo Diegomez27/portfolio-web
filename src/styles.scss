@@ -2,39 +2,83 @@
 // Design tokens — rediseño editorial "ingeniería"
 // ──────────────────────────────────────────────
 :root {
-  // Superficies
+  // ── Superficies (claro por defecto) ──
   --bg:        #F1EDE3;   // hueso cálido (fondo general)
   --panel:     #FAF7EF;   // tarjetas / paneles / formulario
   --surface:   #FFFFFF;   // inputs, previews
 
-  // Tinta
+  // ── Tinta ──
   --ink:       #14130F;   // texto principal (casi negro)
   --muted:     #6B6657;   // texto secundario, labels
   --line:      rgba(20, 19, 15, 0.12);  // bordes / divisores
 
-  // Acento
-  --accent:    #E1432A;   // bermellón (CTAs, marcadores activos)
+  // ── Acento (rojo carmín por defecto; conmutable con [data-accent]) ──
+  --accent:    #6E1524;   // carmín vibrante y maduro (CTAs, marcadores activos)
+  --tinto:     #4A121A;   // rojo tinto / vino (bordes hover, detalles estructurales)
   --ok:        #2F9E44;   // verde "live / disponible"
 
-  // Tipografía
+  // Derivados del acento (se adaptan al acento y al tema)
+  --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);  // fondo de tags / hover
+  --accent-line: color-mix(in srgb, var(--accent) 38%, var(--line));  // borde en hover
+  --accent-text: var(--accent);   // acento legible como TEXTO (se aclara en oscuro)
+
+  // ── Botón "ink" (sólido de alto contraste; se invierte en oscuro) ──
+  --ink-btn-bg: #14130F;
+  --ink-btn-fg: #FFFFFF;
+
+  // ── Textura de puntos (se aclara en oscuro) ──
+  --dot:        rgba(20, 19, 15, 0.045);
+  --dot-strong: rgba(20, 19, 15, 0.10);
+  --scrollbar:  rgba(20, 19, 15, 0.18);
+
+  // ── Tipografía ──
   --font-display: 'Bricolage Grotesque', sans-serif;
   --font-body:    'Hanken Grotesk', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, monospace;
 
-  // Radios
+  // ── Radios ──
   --radius-card:  20px;
   --radius-panel: 22px;
   --radius-btn:   12px;
   --radius-input: 11px;
   --radius-pill:  999px;
 
-  // Sombras
+  // ── Sombras ──
   --shadow-panel:    0 40px 80px -50px rgba(20, 19, 15, 0.55);
   --shadow-row:      0 18px 40px -28px rgba(20, 19, 15, 0.55);
   --shadow-cta:      0 16px 34px -16px var(--accent);
 
-  // Transición base
+  // ── Transición base ──
   --transition: 200ms ease;
+}
+
+// ── Variantes de acento ──────────────────────────
+:root[data-accent='blue']    { --accent: #2D6BE4; }
+:root[data-accent='green']   { --accent: #0F8A6B; }
+:root[data-accent='magenta'] { --accent: #D4308A; }
+
+// ── Tema oscuro — negro neutro + acentos carmín/tinto ───
+:root[data-theme='dark'] {
+  --bg:        #0B0B0D;   // negro casi puro, neutro (sin matiz cálido)
+  --panel:     #141417;   // tarjetas / paneles (separación elegante del fondo)
+  --surface:   #1C1C20;   // inputs, chips, tiers (un paso más claro que panel)
+
+  --ink:       #F2F2F3;   // casi blanco neutro
+  --muted:     #9A9AA1;   // gris neutro, AA sobre --bg
+  --line:      rgba(255, 255, 255, 0.10);   // borde neutro
+
+  // acento de TEXTO aclarado: mantiene el tono pero gana contraste sobre negro
+  --accent-text: color-mix(in srgb, var(--accent) 55%, var(--ink));
+
+  --ink-btn-bg: #F2F2F3;
+  --ink-btn-fg: #0B0B0D;
+
+  --dot:        rgba(255, 255, 255, 0.045);
+  --dot-strong: rgba(255, 255, 255, 0.09);
+  --scrollbar:  rgba(255, 255, 255, 0.18);
+
+  --shadow-panel: 0 40px 80px -50px rgba(0, 0, 0, 0.9);
+  --shadow-row:   0 16px 36px -26px rgba(0, 0, 0, 0.85);
 }
 
 * { box-sizing: border-box; }
@@ -55,6 +99,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 h1, h2, h3 {
@@ -75,6 +120,14 @@ button {
   background: none;
   color: inherit;
 }
+
+// ── Accesibilidad: foco visible solo por teclado ──
+:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+:focus:not(:focus-visible) { outline: none; }
 
 // ──────────────────────────────────────────────
 // Utilidades compartidas
@@ -113,8 +166,8 @@ button {
   }
 
   &--ink {
-    background: var(--ink);
-    color: #fff;
+    background: var(--ink-btn-bg);
+    color: var(--ink-btn-fg);
     &:hover { transform: translateY(-1px); }
   }
 
@@ -134,8 +187,8 @@ button {
   border-radius: var(--radius-pill);
   font-family: var(--font-mono);
   font-size: 11px;
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, var(--line));
   color: var(--muted);
 }
 
@@ -175,6 +228,17 @@ button {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+// Reveal escalonado al hacer scroll (directiva appReveal)
+.reveal > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.reveal-in > * {
+  opacity: 1;
+  transform: none;
+}
+
 // Respeta usuarios sensibles al movimiento
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -187,6 +251,6 @@ button {
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(20, 19, 15, 0.18);
+  background: var(--scrollbar);
   border-radius: var(--radius-pill);
 }

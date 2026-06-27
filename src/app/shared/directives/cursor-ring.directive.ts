@@ -40,11 +40,10 @@ export class CursorRingDirective implements OnInit, OnDestroy {
     this.r.setStyle(ring, 'left', '0');
     this.r.setStyle(ring, 'width', '30px');
     this.r.setStyle(ring, 'height', '30px');
-    this.r.setStyle(ring, 'border', '1.5px solid var(--accent)');
+    this.r.setStyle(ring, 'border', '1.5px solid var(--accent-text)');
     this.r.setStyle(ring, 'border-radius', '50%');
     this.r.setStyle(ring, 'pointer-events', 'none');
     this.r.setStyle(ring, 'z-index', '9999');
-    this.r.setStyle(ring, 'mix-blend-mode', 'multiply');
     this.r.setStyle(ring, 'transform', 'translate(-100px, -100px)');
     this.r.setStyle(ring, 'transition', 'transform .14s ease-out');
     this.r.appendChild(document.body, ring);

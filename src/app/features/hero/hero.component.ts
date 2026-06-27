@@ -7,11 +7,13 @@ import {
 import { ChapterService } from '../../core/services/chapter.service';
 import { ParallaxDirective } from '../../shared/directives/parallax.directive';
 import { MagneticDirective } from '../../shared/directives/magnetic.directive';
+import { DotGridComponent } from '../../shared/components/dot-grid/dot-grid.component';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [ParallaxDirective, MagneticDirective],
+  imports: [ParallaxDirective, MagneticDirective, DotGridComponent, TranslatePipe],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
@@ -22,17 +24,17 @@ export class HeroComponent implements AfterViewInit {
   readonly ready = signal(false);
 
   readonly stack = [
-    { name: 'Angular',    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg' },
-    { name: 'NestJS',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg' },
-    { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
-    { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
-    { name: 'Docker',     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+    { name: 'Angular', logo: 'logos/angular.svg' },
+    { name: 'NestJS', logo: 'logos/nestjs.svg' },
+    { name: 'TypeScript', logo: 'logos/typescript.svg' },
+    { name: 'PostgreSQL', logo: 'logos/postgresql.svg' },
+    { name: 'Docker', logo: 'logos/docker.svg' },
   ];
 
   readonly tiers = [
-    { name: 'Frontend',    tech: 'Angular · Signals' },
-    { name: 'API Gateway', tech: 'NestJS · REST + WS'   },
-    { name: 'Data',        tech: 'PostgreSQL · RLS'     },
+    { name: 'Frontend', tech: 'Angular · Signals' },
+    { name: 'Backend', tech: 'NestJS · REST + WS' },
+    { name: 'Data', tech: 'PostgreSQL · RLS' },
   ];
 
   readonly chips = ['auth', 'billing', 'multi-tenant', 'api gateway', 'realtime'];

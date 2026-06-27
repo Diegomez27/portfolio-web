@@ -1,23 +1,16 @@
 <div class="work">
   <header class="work__head">
-    <span class="work__kicker mono-label">02 / Trabajo</span>
-    <h2 class="work__title">Demos en camino</h2>
-    <p class="work__lead">
-      Estoy preparando un par de demos funcionales para mostrarlas aquí. Las
-      subiré pronto — mientras tanto, puedes ver con qué construyo en
-      <strong>Servicios</strong> o escribirme en <strong>Contacto</strong>.
-    </p>
+    <span class="work__kicker mono-label">{{ 'work.kicker' | t }}</span>
+    <h2 class="work__title">{{ 'work.title' | t }}</h2>
+    <p class="work__lead" [innerHTML]="'work.lead' | t"></p>
   </header>
 
   <div class="soon">
     <span class="soon__badge">
       <span class="soon__dot"></span>
-      <span class="mono-label">Coming soon</span>
+      <span class="mono-label">{{ 'work.badge' | t }}</span>
     </span>
-    <h3 class="soon__title">Trabajo en progreso</h3>
-    <p class="soon__text">
-      Los proyectos se publicarán con su demo en vivo.
-      Vuelve pronto.
-    </p>
+    <h3 class="soon__title">{{ 'work.soonTitle' | t }}</h3>
+    <p class="soon__text">{{ 'work.soonText' | t }}</p>
   </div>
 </div>

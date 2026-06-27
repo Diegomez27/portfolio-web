@@ -12,7 +12,7 @@
   flex-direction: column;
   gap: 10px;
 }
-.services__kicker { color: var(--accent); }
+.services__kicker { color: var(--accent-text); }
 .services__title { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
 .services__lead { color: var(--muted); max-width: 56ch; }
 
@@ -35,11 +35,10 @@
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(20, 19, 15, 0.28);
-    box-shadow: var(--shadow-row);
+    border-color: var(--tinto);
   }
 
-  &__num { color: var(--accent); }
+  &__num { color: var(--accent-text); }
   &__title { font-size: 1.25rem; }
   &__desc { color: var(--muted); font-size: 0.95rem; }
 

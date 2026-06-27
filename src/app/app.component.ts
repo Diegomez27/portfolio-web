@@ -13,6 +13,8 @@ import { ServicesSectionComponent } from './features/services-section/services-s
 import { DemosSectionComponent } from './features/demos/demos-section.component';
 import { ContactSectionComponent } from './features/contact/contact-section.component';
 import { CursorRingDirective } from './shared/directives/cursor-ring.directive';
+import { ThemeControlComponent } from './shared/components/theme-control/theme-control.component';
+import { TranslatePipe } from './shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,8 @@ import { CursorRingDirective } from './shared/directives/cursor-ring.directive';
     DemosSectionComponent,
     ContactSectionComponent,
     CursorRingDirective,
+    ThemeControlComponent,
+    TranslatePipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -48,6 +52,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  private wheelListener?: (e: WheelEvent) => void;
+
   ngAfterViewInit(): void {
     const root = this.scroller.nativeElement;
     const views = Array.from(root.querySelectorAll<HTMLElement>('.view'));
@@ -65,10 +71,43 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     );
 
     views.forEach((v) => this.io!.observe(v));
+
+    // Custom desktop wheel scroll handler to transition smoothly between sections
+    let lastScrollTime = 0;
+    const throttleTime = 450;
+
+    this.wheelListener = (e: WheelEvent) => {
+      if (typeof window !== 'undefined' && window.innerWidth < 1100) return;
+
+      e.preventDefault();
+
+      const now = Date.now();
+      if (now - lastScrollTime < throttleTime) return;
+
+      const current = this.nav.active();
+      const idx = this.chapters.findIndex(c => c.id === current);
+
+      if (e.deltaY > 0) {
+        if (idx < this.chapters.length - 1) {
+          lastScrollTime = now;
+          this.nav.go(this.chapters[idx + 1].id);
+        }
+      } else if (e.deltaY < 0) {
+        if (idx > 0) {
+          lastScrollTime = now;
+          this.nav.go(this.chapters[idx - 1].id);
+        }
+      }
+    };
+
+    root.addEventListener('wheel', this.wheelListener, { passive: false });
   }
 
   ngOnDestroy(): void {
     this.io?.disconnect();
+    if (this.wheelListener && this.scroller) {
+      this.scroller.nativeElement.removeEventListener('wheel', this.wheelListener);
+    }
   }
 
   private scrollTo(c: Chapter): void {

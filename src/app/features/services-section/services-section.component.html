@@ -1,22 +1,19 @@
 <div class="services">
   <header class="services__head">
-    <span class="services__kicker mono-label">03 / Servicios</span>
-    <h2 class="services__title">Cómo puedo ayudarte</h2>
-    <p class="services__lead">
-      Trabajo de punta a punta: del modelo de datos a la interfaz. Estos son los
-      tipos de proyectos.
-    </p>
+    <span class="services__kicker mono-label">{{ 'services.kicker' | t }}</span>
+    <h2 class="services__title">{{ 'services.title' | t }}</h2>
+    <p class="services__lead">{{ 'services.lead' | t }}</p>
   </header>
 
-  <div class="services__grid">
-    @for (s of services; track s.title) {
-      <article class="card">
+  <div class="services__grid" [appReveal]="90">
+    @for (s of services; track s.num) {
+      <article class="card" appTilt>
         <span class="card__num mono-label">{{ s.num }}</span>
-        <h3 class="card__title">{{ s.title }}</h3>
-        <p class="card__desc">{{ s.description }}</p>
+        <h3 class="card__title">{{ s.titleKey | t }}</h3>
+        <p class="card__desc">{{ s.descKey | t }}</p>
         <div class="card__tags">
-          @for (t of s.tags; track t) {
-            <span class="pill">{{ t }}</span>
+          @for (tag of s.tags; track tag) {
+            <span class="pill">{{ tag }}</span>
           }
         </div>
       </article>

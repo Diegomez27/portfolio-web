@@ -12,7 +12,7 @@
   flex-direction: column;
   gap: 10px;
 }
-.work__kicker { color: var(--accent); }
+.work__kicker { color: var(--accent-text); }
 .work__title { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
 .work__lead {
   color: var(--muted);
@@ -47,7 +47,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent-text);
   animation: dgPulseDot 1.6s ease-in-out infinite;
 }
 

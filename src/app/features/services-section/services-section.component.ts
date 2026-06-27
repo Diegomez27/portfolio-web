@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
+import { TiltDirective } from '../../shared/directives/tilt.directive';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 interface Service {
   num: string;
-  title: string;
-  description: string;
+  titleKey: string;
+  descKey: string;
   tags: string[];
 }
 
 @Component({
   selector: 'app-services-section',
   standalone: true,
+  imports: [RevealDirective, TiltDirective, TranslatePipe],
   templateUrl: './services-section.component.html',
   styleUrl: './services-section.component.scss',
 })
@@ -17,30 +21,26 @@ export class ServicesSectionComponent {
   readonly services: Service[] = [
     {
       num: '01',
-      title: 'Sistemas empresariales a la medida',
-      description:
-        'Dashboards, CRMs y paneles administrativos con roles, reportería y exportación. Construidos para operar el día a día de tu negocio.',
+      titleKey: 'services.s1.title',
+      descKey: 'services.s1.desc',
       tags: ['Angular', 'NestJS', 'PostgreSQL'],
     },
     {
       num: '02',
-      title: 'Apps en tiempo real',
-      description:
-        'POS, tracking y colaboración en vivo con WebSockets. Estado sincronizado de baja latencia entre dispositivos y sucursales.',
+      titleKey: 'services.s2.title',
+      descKey: 'services.s2.desc',
       tags: ['WebSockets', 'Redis', 'Signals'],
     },
     {
       num: '03',
-      title: 'APIs y backend escalable',
-      description:
-        'Servicios REST y de eventos bien tipados, validados y documentados. Arquitectura modular lista para crecer sin reescribir.',
+      titleKey: 'services.s3.title',
+      descKey: 'services.s3.desc',
       tags: ['NestJS', 'REST', 'Docker'],
     },
     {
       num: '04',
-      title: 'Frontend de alto rendimiento',
-      description:
-        'Interfaces rápidas y accesibles con Angular moderno: signals, lazy-loading y un sistema de diseño consistente.',
+      titleKey: 'services.s4.title',
+      descKey: 'services.s4.desc',
       tags: ['Angular', 'SCSS', 'a11y'],
     },
   ];

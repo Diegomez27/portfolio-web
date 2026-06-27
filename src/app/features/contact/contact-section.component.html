@@ -1,11 +1,9 @@
-<div class="contact">
+<div class="contact" [appReveal]="120">
   <!-- Izquierda: info + enlaces -->
   <div class="contact__info">
-    <span class="contact__kicker mono-label">04 / Contacto</span>
-    <h2 class="contact__title">¿Tienes un sistema en mente?</h2>
-    <p class="contact__lead">
-      Cuéntame qué quieres construir.
-    </p>
+    <span class="contact__kicker mono-label">{{ 'contact.kicker' | t }}</span>
+    <h2 class="contact__title">{{ 'contact.title' | t }}</h2>
+    <p class="contact__lead">{{ 'contact.lead' | t }}</p>
 
     <ul class="links">
       @for (l of links; track l.kind) {
@@ -28,60 +26,58 @@
     @if (formState() === 'success') {
       <div class="contact__success">
         <span class="contact__success-icon">✓</span>
-        <h3>¡Mensaje enviado!</h3>
-        <p>Gracias por escribir. Te responderé muy pronto.</p>
+        <h3>{{ 'contact.successTitle' | t }}</h3>
+        <p>{{ 'contact.successText' | t }}</p>
       </div>
     } @else {
       <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" novalidate>
         <div class="field" [class.field--error]="isInvalid('name')">
-          <label for="name" class="mono-label">Nombre</label>
+          <label for="name" class="mono-label">{{ 'form.name' | t }}</label>
           <input id="name" type="text" formControlName="name"
-                 placeholder="Tu nombre" autocomplete="name">
+                 [placeholder]="'form.namePh' | t" autocomplete="name">
           @if (isInvalid('name')) {
-            <span class="field__error">Nombre requerido (mínimo 2 caracteres)</span>
+            <span class="field__error">{{ 'form.err.name' | t }}</span>
           }
         </div>
 
         <div class="field" [class.field--error]="isInvalid('email')">
-          <label for="email" class="mono-label">Correo</label>
+          <label for="email" class="mono-label">{{ 'form.email' | t }}</label>
           <input id="email" type="email" formControlName="email"
-                 placeholder="tu@empresa.com" autocomplete="email">
+                 [placeholder]="'form.emailPh' | t" autocomplete="email">
           @if (isInvalid('email')) {
-            <span class="field__error">Correo inválido</span>
+            <span class="field__error">{{ 'form.err.email' | t }}</span>
           }
         </div>
 
         <div class="field" [class.field--error]="isInvalid('projectType')">
-          <label for="projectType" class="mono-label">Tipo de proyecto</label>
+          <label for="projectType" class="mono-label">{{ 'form.projectType' | t }}</label>
           <select id="projectType" formControlName="projectType">
-            <option value="" disabled>Selecciona una opción</option>
-            @for (type of projectTypes; track type) {
-              <option [value]="type">{{ type }}</option>
+            <option value="" disabled>{{ 'form.selectDefault' | t }}</option>
+            @for (pt of projectTypes; track pt.value) {
+              <option [value]="pt.value">{{ pt.labelKey | t }}</option>
             }
           </select>
           @if (isInvalid('projectType')) {
-            <span class="field__error">Selecciona un tipo de proyecto</span>
+            <span class="field__error">{{ 'form.err.projectType' | t }}</span>
           }
         </div>
 
         <div class="field" [class.field--error]="isInvalid('message')">
-          <label for="message" class="mono-label">¿Qué quieres construir?</label>
+          <label for="message" class="mono-label">{{ 'form.message' | t }}</label>
           <textarea id="message" formControlName="message" rows="5"
-                    placeholder="Describe el sistema, tu industria, plazos, etc."></textarea>
+                    [placeholder]="'form.messagePh' | t"></textarea>
           @if (isInvalid('message')) {
-            <span class="field__error">Mensaje requerido (mínimo 20 caracteres)</span>
+            <span class="field__error">{{ 'form.err.message' | t }}</span>
           }
         </div>
 
         @if (formState() === 'error') {
-          <p class="form__server-error">
-            Hubo un error al enviar. Intenta de nuevo o escríbeme por correo.
-          </p>
+          <p class="form__server-error">{{ 'form.serverError' | t }}</p>
         }
 
-        <button type="submit" class="btn btn--ink form__submit"
+        <button type="submit" class="btn btn--accent form__submit"
                 [disabled]="formState() === 'submitting'">
-          {{ formState() === 'submitting' ? 'Enviando…' : 'Enviar mensaje →' }}
+          {{ (formState() === 'submitting' ? 'form.sending' : 'form.submit') | t }}
         </button>
       </form>
     }

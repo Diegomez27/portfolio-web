@@ -1,35 +1,114 @@
 <div class="shell" appCursorRing>
   <!-- RAIL DE NAVEGACIÓN -->
   <aside class="rail">
-    <div class="brand">
-      <strong>Diego Gómez</strong>
-      <span class="mono-label">Full-Stack Developer</span>
+    <div class="rail__head">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="3" y="3" width="18" height="18" rx="6" stroke="currentColor" stroke-width="2" />
+            <rect x="11" y="11" width="18" height="18" rx="6" fill="var(--accent)" />
+          </svg>
+        </span>
+        <span class="brand__name">
+          <strong>Diego Gómez</strong>
+          <span class="mono-label">{{ 'brand.role' | t }}</span>
+        </span>
+      </div>
+      <hr class="rail__sep" />
+    </div>
+
+    <!-- Spacer decorativo superior (solo desktop) -->
+    <div class="rail__deco rail__deco--top" aria-hidden="true">
+      <svg class="rail__orbit rail__orbit--sm" viewBox="0 0 80 80" fill="none">
+        <line x1="40" y1="5" x2="40" y2="75" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="2 3"/>
+        <line x1="5" y1="40" x2="75" y2="40" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="2 3"/>
+        <circle cx="40" cy="40" r="30" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="4 6" class="orbit-ring"/>
+        <circle cx="40" cy="40" r="18" stroke="var(--line)" stroke-width="0.5"/>
+        <circle cx="40" cy="40" r="8" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="1 2"/>
+        
+        <!-- Nodes orbiting at different radii/directions -->
+        <rect class="orbit-sq" x="33" y="6" width="14" height="14" rx="4"
+              stroke="var(--accent-text)" stroke-width="0.8" fill="var(--panel)"/>
+        <circle class="orbit-inner-dot" cx="40" cy="22" r="2.5" fill="var(--muted)"/>
+        <line class="orbit-dash" x1="40" y1="8" x2="40" y2="12" stroke="var(--accent)" stroke-width="1.5"/>
+      </svg>
     </div>
 
     <nav>
       @for (c of chapters; track c.id) {
-        <button
-          class="nav-row"
-          [class.active]="nav.active() === c.id"
-          (click)="nav.go(c.id)">
-          <span class="bar"></span>
-          <span class="num">{{ c.num }}</span>
-          <span class="label">{{ c.label }}</span>
-        </button>
+      <button class="nav-row" [class.active]="nav.active() === c.id" (click)="nav.go(c.id)">
+        <span class="bar"></span>
+        <span class="num">{{ c.num }}</span>
+        <span class="label">{{ ('nav.' + c.id) | t }}</span>
+      </button>
       }
     </nav>
 
-    <div class="status">
-      <span class="live-dot"></span>
-      <span class="mono-label">Disponible para proyectos</span>
+    <!-- Spacer decorativo inferior (solo desktop) -->
+    <div class="rail__deco rail__deco--bottom" aria-hidden="true">
+      <svg class="rail__orbit rail__orbit--sm" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="40" r="34" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="12 4" class="orbit-ring" style="animation-duration: 30s"/>
+        <circle cx="40" cy="40" r="24" stroke="var(--line)" stroke-width="0.5"/>
+        <circle cx="40" cy="40" r="14" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="3 3"/>
+        
+        <!-- Nodes orbiting at different radii/directions -->
+        <circle class="orbit-dot" cx="40" cy="74" r="3.5" fill="var(--accent)" opacity="0.5"/>
+        <rect class="orbit-inner-sq" x="37" y="23" width="6" height="6" rx="1.5"
+              stroke="var(--accent-text)" stroke-width="0.8" fill="var(--panel)"/>
+        <circle class="orbit-outer-dot" cx="40" cy="6" r="2.2" fill="var(--muted)"/>
+      </svg>
+    </div>
+
+    <div class="rail__foot">
+      <div class="rail__social">
+        <a class="rail__icon" href="https://github.com/Diegomez27" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5 18 5.3 18 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z" />
+          </svg>
+        </a>
+        <a class="rail__icon" href="https://www.linkedin.com/in/diego-alejandro-g%C3%B3mez-serrano-9abbb038a/"
+          target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">
+            <path
+              d="M20.45 20.45h-3.56v-5.57c0-1.33 0-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="status">
+        <span class="live-dot"></span>
+        <span class="mono-label">{{ 'status.available' | t }}</span>
+      </div>
+
+      <app-theme-control />
     </div>
   </aside>
 
-  <!-- ÁREA DE CONTENIDO: scroll real + snap por sección -->
+  <!-- ÁREA DE CONTENIDO: scroll real -->
   <main class="scroller" #scroller>
-    <section id="home" class="view"><app-hero /></section>
+    <section id="home" class="view">
+      <app-hero />
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="mono-label">{{ 'hero.scroll' | t }}</span>
+        <svg class="scroll-hint__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M6 13l6 6 6-6" />
+        </svg>
+      </div>
+    </section>
     <section id="work" class="view"><app-demos-section /></section>
     <section id="services" class="view"><app-services-section /></section>
     <section id="contact" class="view"><app-contact-section /></section>
   </main>
+
+  <!-- TAB BAR INFERIOR (móvil): toca para hacer scroll a la sección -->
+  <nav class="tabbar">
+    @for (c of chapters; track c.id) {
+    <button class="tabbar__item" [class.active]="nav.active() === c.id" (click)="nav.go(c.id)">
+      <span class="tabbar__num">{{ c.num }}</span>
+      <span class="tabbar__label">{{ ('nav.' + c.id) | t }}</span>
+    </button>
+    }
+  </nav>
 </div>

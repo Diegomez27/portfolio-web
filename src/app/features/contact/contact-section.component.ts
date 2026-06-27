@@ -4,20 +4,26 @@ import {
   ContactService,
   ContactPayload,
 } from '../../core/services/contact.service';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
 interface ContactLink {
   kind: string;
-  label: string;
   value: string;
   href: string;
+}
+
+interface ProjectType {
+  value: string;   // valor canónico en español (lo espera el backend)
+  labelKey: string;
 }
 
 @Component({
   selector: 'app-contact-section',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RevealDirective, TranslatePipe],
   templateUrl: './contact-section.component.html',
   styleUrl: './contact-section.component.scss',
 })
@@ -34,30 +40,27 @@ export class ContactSectionComponent {
     message:     ['', [Validators.required, Validators.minLength(20)]],
   });
 
-  readonly projectTypes = [
-    'Landing page',
-    'Sistema de gestión / dashboard',
-    'Integración SAT / fiscal',
-    'SaaS multi-tenant',
-    'Otro',
+  readonly projectTypes: ProjectType[] = [
+    { value: 'Landing page',                    labelKey: 'pt.landing' },
+    { value: 'Sistema de gestión / dashboard',  labelKey: 'pt.dashboard' },
+    { value: 'Integración SAT / fiscal',        labelKey: 'pt.fiscal' },
+    { value: 'SaaS multi-tenant',               labelKey: 'pt.saas' },
+    { value: 'Otro',                            labelKey: 'pt.other' },
   ];
 
   readonly links: ContactLink[] = [
     {
       kind: 'Email',
-      label: 'Escríbeme',
       value: 'diegomez27@outlook.com',
       href: 'mailto:diegomez27@outlook.com',
     },
     {
       kind: 'GitHub',
-      label: 'Código',
       value: 'github.com/Diegomez27',
       href: 'https://github.com/Diegomez27',
     },
     {
       kind: 'LinkedIn',
-      label: 'Perfil',
       value: 'linkedin.com/in/diego-gomez',
       href: 'https://www.linkedin.com/in/diego-alejandro-g%C3%B3mez-serrano-9abbb038a/',
     },

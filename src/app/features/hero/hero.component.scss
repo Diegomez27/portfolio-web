@@ -16,11 +16,23 @@
   gap: 22px;
 }
 
+.hero__overline {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin-bottom: 12px;
+}
+
 .hero__title {
-  font-size: clamp(2.3rem, 4.7vw, 4.5rem);
+  font-size: clamp(2.3rem, 9vw, 3rem);   // móvil: grande y apretado
+  line-height: 1.0;
+  letter-spacing: -0.03em;
   text-wrap: balance;
   max-width: 15ch;
-  em { color: var(--accent); font-style: normal; }
+  em { color: var(--accent-text); font-style: normal; }
 }
 
 .hero__sub {
@@ -48,18 +60,21 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 12px 7px 10px;
-  background: var(--surface);
-  border: 1px solid var(--line);
+  padding: 7px 12px 7px 9px;
+  background: color-mix(in srgb, var(--accent) 5%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, var(--line));
   border-radius: var(--radius-pill);
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition), border-color var(--transition);
 
-  &__logo { display: block; }
+  &__logo {
+    display: block;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.18));
+  }
   &__name { font-size: 0.85rem; font-weight: 600; }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-row);
+    border-color: var(--accent-line);
   }
 }
 
@@ -71,40 +86,78 @@
 }
 
 // ── Columna derecha: diagrama ───────────────────
-.hero__right { display: none; }
+// MÓVIL: tarjeta full-width con textura propia
+.hero__right { width: 100%; }
 
 .diagram {
   position: relative;
-  padding: 30px;
-  border-radius: var(--radius-card);
-  background-image: radial-gradient(rgba(20, 19, 15, 0.16) 1px, transparent 1px);
-  background-size: 18px 18px;
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
-  mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
+  width: 100%;
+  padding: 22px 20px;
+  border-radius: 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 60px -45px rgba(20, 19, 15, 0.5);
+  overflow: hidden;
 
-  &__label { display: block; margin-bottom: 14px; }
+  // textura de puntos dentro de la tarjeta
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--dot-strong) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.7;
+  }
 
-  &__stack { display: flex; flex-direction: column; gap: 12px; }
+  &__label { position: relative; z-index: 2; display: block; margin-bottom: 14px; }
+
+  &__stack {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__canvas { display: none; }   // canvas interactivo solo en desktop
+  &__deco   { display: none; }   // geometría decorativa solo en desktop
+}
+
+// chips inline (móvil)
+.hero__chips-inline {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 16px;
 }
 
 .tier {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 16px;
-  background: var(--surface);
+  padding: 13px 15px;
+  background: color-mix(in srgb, var(--accent) 4%, var(--surface));
   border: 1px solid var(--line);
-  border-left: 2px solid var(--accent);
-  border-radius: 12px;
-  box-shadow: var(--shadow-row);
+  border-radius: 12px;       // bento: borde completo (sin side-stripe ni ghost-shadow)
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
 
   &__text { display: flex; flex-direction: column; line-height: 1.3; }
   &__text strong { font-family: var(--font-display); font-size: 15px; }
 }
 
 .diagram__chip {
+  display: none;   // móvil: se usan los chips inline
   position: absolute;
-  background: rgba(255, 255, 255, 0.65);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
@@ -117,6 +170,7 @@
 
 // ── Reveal escalonado (solo cuando .ready) ──────
 .hero.ready {
+  .hero__overline,
   .hero__title,
   .hero__sub,
   .hero__stack,
@@ -124,11 +178,12 @@
   .diagram {
     animation: dgReveal .6s ease backwards;
   }
-  .hero__title { animation-delay: .05s; }
-  .hero__sub   { animation-delay: .12s; }
-  .hero__stack { animation-delay: .19s; }
-  .hero__ctas  { animation-delay: .26s; }
-  .diagram     { animation-delay: .33s; }
+  .hero__overline { animation-delay: .02s; }
+  .hero__title    { animation-delay: .08s; }
+  .hero__sub      { animation-delay: .15s; }
+  .hero__stack    { animation-delay: .22s; }
+  .hero__ctas     { animation-delay: .29s; }
+  .diagram        { animation-delay: .36s; }
 }
 
 // ── Desktop: dos columnas ───────────────────────
@@ -138,5 +193,125 @@
     align-items: center;
     gap: clamp(40px, 5vw, 88px);
   }
-  .hero__right { display: block; flex: 1; }
+
+  .hero__title { font-size: clamp(3rem, 4.7vw, 4.5rem); }
+
+  .hero__right {
+    flex: 1;
+    position: relative;
+
+    // glow radial sutil de acento detrás del diagrama
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -8% 0 -8% 6%;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(58% 58% at 64% 42%,
+                  color-mix(in srgb, var(--accent-text) 16%, transparent), transparent 72%);
+      filter: blur(8px);
+    }
+  }
+
+  // El diagrama vuelve a ser un lienzo flotante (sin tarjeta)
+  .diagram {
+    max-width: 520px;
+    margin-left: auto;
+    min-height: min(58vh, 440px);
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &::before { display: none; }   // lo reemplaza el canvas interactivo
+
+    &__canvas {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, transparent 78%);
+              mask-image: radial-gradient(ellipse at center, #000 35%, transparent 78%);
+    }
+  }
+
+  .hero__chips-inline { display: none; }   // en desktop, chips flotantes
+  .diagram__chip { display: inline-flex; }
+
+  // ── Decorative floating geometry ──────────────
+  .diagram__deco {
+    display: contents; // children position from .diagram
+  }
+
+  .deco {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    color: var(--accent-text);
+    opacity: 0.22;
+    will-change: transform;
+
+    &--sq {
+      width: 48px;
+      top: -6%;
+      right: 18%;
+      opacity: 0.25;
+      animation: decoFloat 14s ease-in-out infinite;
+    }
+
+    &--cross {
+      width: 24px;
+      top: 4%;
+      right: -2%;
+      opacity: 0.30;
+      animation: decoFloat 11s ease-in-out infinite reverse;
+      animation-delay: -3s;
+    }
+
+    &--ring {
+      width: 40px;
+      bottom: 4%;
+      right: 4%;
+      opacity: 0.20;
+      animation: decoFloat 16s ease-in-out infinite;
+      animation-delay: -7s;
+    }
+
+    &--diamond {
+      width: 28px;
+      bottom: 8%;
+      left: -2%;
+      opacity: 0.18;
+      animation: decoFloat 13s ease-in-out infinite reverse;
+      animation-delay: -5s;
+    }
+
+    &--dots {
+      width: 24px;
+      top: 46%;
+      right: -6%;
+      opacity: 0.35;
+      animation: decoFloat 18s ease-in-out infinite;
+      animation-delay: -9s;
+    }
+  }
+}
+
+// ── Decorative float keyframes ──────────────────
+@keyframes decoFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+  50% {
+    transform: translateY(4px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(2deg);
+  }
 }

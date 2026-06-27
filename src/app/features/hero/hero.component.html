@@ -1,18 +1,13 @@
 <section class="hero" [class.ready]="ready()">
   <!-- Columna izquierda -->
   <div class="hero__left">
-    <h1 class="hero__title">
-      Hola, soy Diego. Desarrollador <em>full-stack</em>.
-    </h1>
+    <span class="hero__overline mono-label">{{ 'hero.overline' | t }}</span>
+    <h1 class="hero__title" [innerHTML]="'hero.title' | t"></h1>
 
-    <p class="hero__sub">
-      Diseño y construyo aplicaciones con <strong>Angular</strong> y
-      <strong>NestJS</strong> — interfaces rápidas, APIs bien tipadas y bases de
-      datos sólidas.
-    </p>
+    <p class="hero__sub" [innerHTML]="'hero.sub' | t"></p>
 
     <div class="hero__stack">
-      <span class="hero__stack-label mono-label">Stack</span>
+      <span class="hero__stack-label mono-label">{{ 'hero.stackLabel' | t }}</span>
       <div class="hero__stack-logos">
         @for (t of stack; track t.name) {
           <span class="tech" [title]="t.name">
@@ -26,22 +21,25 @@
 
     <div class="hero__ctas">
       <button class="btn btn--accent" appMagnetic (click)="nav.go('work')">
-        Ver el trabajo
+        {{ 'hero.ctaWork' | t }}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       </button>
       <button class="btn btn--outline" (click)="nav.go('contact')">
-        Agendar llamada
+        {{ 'hero.ctaContact' | t }}
       </button>
     </div>
   </div>
 
-  <!-- Columna derecha: diagrama de arquitectura (solo desktop) -->
+  <!-- Columna derecha: diagrama de arquitectura (tarjeta en móvil, lienzo en desktop) -->
   <div class="hero__right" aria-hidden="true">
     <div class="diagram" [appParallax]="10">
-      <span class="diagram__label mono-label">// arquitectura · región mx-central</span>
+      <!-- dot-grid interactivo (solo desktop) -->
+      <app-dot-grid class="diagram__canvas" />
+
+      <span class="diagram__label mono-label">{{ 'hero.archLabel' | t }}</span>
 
       <div class="diagram__stack">
         @for (t of tiers; track t.name) {
@@ -55,11 +53,45 @@
         }
       </div>
 
+      <!-- chips inline: fila bajo los tiers (móvil) -->
+      <div class="hero__chips-inline">
+        @for (chip of chips; track chip) {
+          <span class="pill">{{ chip }}</span>
+        }
+      </div>
+
+      <!-- chips flotantes: solo desktop -->
       @for (chip of chips; track chip; let i = $index) {
         <span class="diagram__chip pill" [class]="'c' + i" [appParallax]="18 + i * 4">
           {{ chip }}
         </span>
       }
+
+      <!-- Decorative floating geometry (desktop only) -->
+      <div class="diagram__deco" aria-hidden="true">
+        <!-- Rounded square outline — top right -->
+        <svg class="deco deco--sq" viewBox="0 0 40 40" fill="none">
+          <rect x="2" y="2" width="36" height="36" rx="10" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+        <!-- Small cross — top area -->
+        <svg class="deco deco--cross" viewBox="0 0 20 20" fill="none">
+          <path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <!-- Thin ring — bottom right -->
+        <svg class="deco deco--ring" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <!-- Diamond — bottom area -->
+        <svg class="deco deco--diamond" viewBox="0 0 24 24" fill="none">
+          <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.2"
+                transform="rotate(45 12 12)"/>
+        </svg>
+        <!-- Small dot pair — mid right -->
+        <svg class="deco deco--dots" viewBox="0 0 20 8" fill="currentColor">
+          <circle cx="4" cy="4" r="2.5"/>
+          <circle cx="16" cy="4" r="1.5"/>
+        </svg>
+      </div>
     </div>
   </div>
 </section>

@@ -1,13 +1,26 @@
 .shell {
   display: flex;
-  flex-direction: column;       // MOBILE primero: rail arriba
+  flex-direction: column; // MOBILE primero: rail arriba
   height: 100dvh;
+
+  // textura de puntos global sutil (quita la sensación "plana")
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
 }
 
 // ── Rail ────────────────────────────────────────
 .rail {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; // MÓVIL: barra superior (brand + tema)
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
   padding: 12px 18px;
   border-bottom: 1px solid var(--line);
@@ -16,20 +29,91 @@
 
   .brand {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 12px;
     line-height: 1.1;
-    strong { font-family: var(--font-display); font-weight: 800; font-size: 16px; }
-    .mono-label { display: none; }
+
+    &__mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      color: var(--ink);
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &__name {
+      display: flex;
+      flex-direction: column;
+    }
+
+    strong {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .mono-label {
+      display: none;
+    }
   }
 
   nav {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    &::-webkit-scrollbar { display: none; }
+    display: none;
   }
-  .status { display: none; }      // se oculta en móvil
+
+  // en móvil navega el tab bar inferior
+
+  .rail__sep {
+    border: none;
+    height: 1px;
+    background: var(--line);
+    opacity: 0.35;
+    margin: 0;
+    display: none; // se muestra solo en desktop
+  }
+
+  .rail__social {
+    display: none; // se muestra solo en desktop
+  }
+
+  .rail__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    transition: color var(--transition), transform var(--transition);
+
+    &:hover {
+      color: var(--accent-text);
+      transform: translateY(-1px);
+    }
+  }
+
+  .rail__built {
+    display: block;
+    margin-top: 2px;
+    opacity: 0.6;
+  }
+
+  .status {
+    display: none;
+  }
+
+  // se oculta en móvil
+
+  .rail__foot {
+    display: flex;
+    align-items: center;
+  }
+
+  // muestra el control de tema
 }
 
 .nav-row {
@@ -39,24 +123,43 @@
   white-space: nowrap;
   font-family: var(--font-display);
   color: var(--muted);
-  transition: color var(--transition);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: color var(--transition), border-color var(--transition);
 
   .bar {
-    width: 0; height: 2px;
-    background: var(--accent);
+    width: 0;
+    height: 2px;
+    background: var(--accent-text);
     border-radius: 2px;
     transition: width .35s;
   }
-  .num   { font-family: var(--font-mono); font-size: 11px; }
-  .label { font-size: 14px; }
 
-  &:hover { color: var(--ink); }
+  .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  &:hover {
+    color: var(--ink);
+    border-color: var(--tinto);
+  }
 
   &.active {
     color: var(--ink);
     font-weight: 800;
-    .bar { width: 18px; }
-    .num { color: var(--accent); }
+
+    .bar {
+      width: 18px;
+    }
+
+    .num {
+      color: var(--accent-text);
+    }
   }
 }
 
@@ -65,47 +168,258 @@
   flex: 1;
   overflow-y: auto;
   scroll-behavior: smooth;
+  padding-bottom: 88px; // espacio para el tab bar inferior (móvil)
+}
+
+// ── Tab bar inferior (móvil) ────────────────────
+.tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+}
+
+.tabbar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  transition: color var(--transition);
+
+  &.active {
+    color: var(--ink);
+  }
+
+  &.active .tabbar__num {
+    color: var(--accent-text);
+    font-weight: 700;
+  }
+}
+
+.tabbar__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .view {
   padding: 26px 20px 64px;
 
   // separación entre secciones en móvil
-  & + .view { border-top: 1px solid var(--line); }
+  &+.view {
+    border-top: 1px solid var(--line);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scroller { scroll-behavior: auto; }
+  .scroller {
+    scroll-behavior: auto;
+  }
+}
+
+// ── Scroll hint indicator ───────────────────────
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 32px;
+  color: var(--muted);
+  opacity: 0.55;
+  animation: dgFloat 2.4s ease-in-out infinite;
+
+  .mono-label {
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+  }
+
+  &__arrow {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@keyframes dgFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+// ── Sidebar orbital decoration ──────────────────
+.rail__deco {
+  display: none;  // visible solo en desktop
+}
+
+.rail__orbit {
+  width: 100%;
+  max-width: 140px;
+  opacity: 0.6;
+
+  &--sm {
+    max-width: 80px;
+
+    .orbit-sq {
+      transform-origin: 40px 40px;
+    }
+
+    .orbit-dot {
+      transform-origin: 40px 40px;
+    }
+
+    .orbit-inner-dot {
+      transform-origin: 40px 40px;
+      animation: orbitSpin 12s linear infinite;
+    }
+
+    .orbit-dash {
+      transform-origin: 40px 40px;
+      animation: orbitSpin 16s linear infinite reverse;
+    }
+
+    .orbit-inner-sq {
+      transform-origin: 40px 40px;
+      animation: orbitSpin 15s linear infinite;
+    }
+
+    .orbit-outer-dot {
+      transform-origin: 40px 40px;
+      animation: orbitSpin 25s linear infinite reverse;
+    }
+  }
+}
+
+.orbit-ring {
+  transform-origin: center;
+  animation: orbitSpin 40s linear infinite;
+}
+
+.orbit-sq {
+  transform-origin: 60px 60px;
+  animation: orbitSpin 20s linear infinite reverse;
+}
+
+.orbit-dot {
+  transform-origin: 60px 60px;
+  animation: orbitSpin 28s linear infinite, orbitPulse 3s ease-in-out infinite;
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes orbitPulse {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 0.12; }
 }
 
 // ── DESKTOP: rail lateral fijo + snap por sección ─
 @media (min-width: 1100px) {
-  .shell { flex-direction: row; }
+  .shell {
+    flex-direction: row;
+  }
 
   .rail {
-    width: 266px;
-    flex: 0 0 266px;
-    align-items: flex-start;
+    width: 290px;
+    flex: 0 0 290px;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     border-bottom: 0;
     border-right: 1px solid var(--line);
-    padding: 40px 36px;
+    padding: 40px 24px;
+    text-align: center;
 
-    .brand .mono-label { display: block; margin-top: 4px; }
+    .brand {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
 
-    nav { flex-direction: column; gap: 2px; width: 100%; overflow: visible; }
-    .nav-row { width: 100%; padding: 11px 0; }
+    .brand .mono-label {
+      display: block;
+      margin-top: 4px;
+    }
+
+    .rail__sep {
+      display: block;
+      margin: 16px 0;
+      width: 100%;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      width: 100%;
+    }
+
+    .nav-row {
+      width: 100%;
+      padding: 10px 12px;
+      justify-content: center;
+    }
 
     .status {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
+    }
+
+    .rail__social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .rail__deco {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+      min-height: 0;
+      padding: 20px 0;
+    }
+
+    .rail__foot {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
   }
 
   .scroller {
-    scroll-snap-type: y proximity;
+    padding-bottom: 0;
+    overscroll-behavior: none;
   }
+
+  .tabbar {
+    display: none;
+  }
+
+  // desktop usa el rail lateral
 
   .view {
     min-height: 100dvh;
@@ -113,8 +427,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    scroll-snap-align: start;
 
-    & + .view { border-top: 0; }   // sin divisores en desktop
+    &+.view {
+      border-top: 0;
+    }
   }
 }
