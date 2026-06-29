@@ -38,6 +38,39 @@
     border-color: var(--tinto);
   }
 
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: var(--accent-text);
+    background: color-mix(in srgb, var(--tinto) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--tinto) 22%, transparent);
+    transition: background var(--transition), border-color var(--transition);
+
+    svg { width: 22px; height: 22px; }
+  }
+
+  &:hover &__icon {
+    background: color-mix(in srgb, var(--tinto) 18%, transparent);
+    border-color: var(--tinto);
+  }
+
   &__num { color: var(--accent-text); }
   &__title { font-size: 1.25rem; }
   &__desc { color: var(--muted); font-size: 0.95rem; }
@@ -50,19 +83,17 @@
   }
 }
 
-// Desktop: ritmo asimétrico 7/5 · 5/7 — rompe el grid idéntico y crea jerarquía.
+// Desktop: card destacada a todo lo ancho + dos tarjetas en la segunda fila.
 @media (min-width: 760px) {
   .services__grid {
     grid-template-columns: repeat(12, 1fr);
   }
-  .card:nth-child(1) { grid-column: span 7; }
-  .card:nth-child(2) { grid-column: span 5; }
-  .card:nth-child(3) { grid-column: span 5; }
-  .card:nth-child(4) { grid-column: span 7; }
+  .card:nth-child(1) { grid-column: span 12; }
+  .card:nth-child(2) { grid-column: span 6; }
+  .card:nth-child(3) { grid-column: span 6; }
 
-  // Las tarjetas anchas respiran un poco más y suben el peso del título.
-  .card:nth-child(1),
-  .card:nth-child(4) {
+  // La tarjeta ancha respira un poco más y sube el peso del título.
+  .card:nth-child(1) {
     padding: 28px 30px;
     .card__title { font-size: 1.4rem; }
   }

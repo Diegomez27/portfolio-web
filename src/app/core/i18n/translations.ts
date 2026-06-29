@@ -37,14 +37,12 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'services.kicker': '/ Servicios',
     'services.title': 'Cómo puedo ayudarte',
     'services.lead': 'Trabajo de punta a punta: del modelo de datos a la interfaz. Estos son los tipos de proyectos.',
-    'services.s1.title': 'Sistemas empresariales a la medida',
-    'services.s1.desc': 'Dashboards, CRMs y paneles administrativos con roles, reportería y exportación. Construidos para operar el día a día de tu negocio.',
+    'services.s1.title': 'Sistemas a la medida',
+    'services.s1.desc': 'Para negocios que operan con Excel, WhatsApp o papel. CRMs, dashboards y paneles de control con roles de usuario, reportes y todo lo que necesitas para ver y gestionar tu negocio desde un solo lugar.',
     'services.s2.title': 'Apps en tiempo real',
-    'services.s2.desc': 'POS, tracking y colaboración en vivo con WebSockets. Estado sincronizado de baja latencia entre dispositivos y sucursales.',
-    'services.s3.title': 'APIs y backend escalable',
-    'services.s3.desc': 'Servicios REST y de eventos bien tipados, validados y documentados. Arquitectura modular lista para crecer sin reescribir.',
-    'services.s4.title': 'Frontend de alto rendimiento',
-    'services.s4.desc': 'Interfaces rápidas y accesibles con Angular moderno: signals, lazy-loading y un sistema de diseño consistente.',
+    'services.s2.desc': 'Para negocios con operación activa: puntos de venta, seguimiento de pedidos, coordinación entre sucursales. Todo sincronizado al instante entre dispositivos.',
+    'services.s3.title': 'Presencia web',
+    'services.s3.desc': 'Sitio informativo profesional para tu negocio. Diseño propio, carga rápida, se ve bien en celular. Listo en 1–2 semanas.',
 
     // Contacto
     'contact.kicker': '/ Contacto',
@@ -75,10 +73,9 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'form.sending': 'Enviando…',
 
     // Tipos de proyecto (el value enviado al backend se mantiene en español)
-    'pt.landing': 'Landing page',
-    'pt.dashboard': 'Sistema de gestión / dashboard',
-    'pt.fiscal': 'Integración SAT / fiscal',
-    'pt.saas': 'SaaS multi-tenant',
+    'pt.systems': 'Sistema a la medida',
+    'pt.realtime': 'App en tiempo real / POS',
+    'pt.landing': 'Landing page / Sitio web',
     'pt.other': 'Otro',
 
     // Meta
@@ -120,14 +117,12 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'services.kicker': '/ Services',
     'services.title': 'How I can help',
     'services.lead': 'I work end to end: from the data model to the interface. These are the kinds of projects.',
-    'services.s1.title': 'Custom business systems',
-    'services.s1.desc': 'Dashboards, CRMs and admin panels with roles, reporting and exports. Built to run your day-to-day operations.',
+    'services.s1.title': 'Custom systems',
+    'services.s1.desc': 'For businesses still running on Excel, WhatsApp or paper. CRMs, dashboards and control panels with user roles, reports and everything you need to see and manage your business from one place.',
     'services.s2.title': 'Real-time apps',
-    'services.s2.desc': 'POS, tracking and live collaboration with WebSockets. Low-latency synced state across devices and branches.',
-    'services.s3.title': 'Scalable APIs & backend',
-    'services.s3.desc': 'Well-typed, validated and documented REST and event services. Modular architecture ready to grow without rewrites.',
-    'services.s4.title': 'High-performance frontend',
-    'services.s4.desc': 'Fast, accessible interfaces with modern Angular: signals, lazy-loading and a consistent design system.',
+    'services.s2.desc': 'For businesses with active operations: points of sale, order tracking, coordination across locations. Everything synced instantly across devices.',
+    'services.s3.title': 'Web presence',
+    'services.s3.desc': 'A professional informational site for your business. Custom design, fast loading, looks great on mobile. Ready in 1–2 weeks.',
 
     // Contact
     'contact.kicker': '/ Contact',
@@ -158,10 +153,9 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'form.sending': 'Sending…',
 
     // Project types (backend value stays in Spanish)
-    'pt.landing': 'Landing page',
-    'pt.dashboard': 'Management system / dashboard',
-    'pt.fiscal': 'SAT / tax integration',
-    'pt.saas': 'Multi-tenant SaaS',
+    'pt.systems': 'Custom system',
+    'pt.realtime': 'Real-time app / POS',
+    'pt.landing': 'Landing page / Website',
     'pt.other': 'Other',
 
     // Meta

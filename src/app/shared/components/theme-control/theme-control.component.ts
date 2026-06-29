@@ -35,9 +35,6 @@ import { LocaleService } from '../../../core/services/locale.service';
           [class.active]="theme.accent() === 'custom'"
           [style.--c]="theme.customColor()"
           title="Color personalizado">
-          <svg class="theme__palette-icon" viewBox="0 0 24 24" width="10" height="10" fill="currentColor">
-            <path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10c1.25 0 2.25-1 2.25-2.25.04-.58.28-1.1.66-1.48.38-.38.9-.62 1.48-.66h.04c1.25 0 2.57-1 2.57-2.25a9.3 9.3 0 0 0-.25-2C19.78 5.75 16.27 2 12 2Zm-5.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm3-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm3 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/>
-          </svg>
           <input
             type="color"
             class="theme__color-input"
@@ -132,13 +129,6 @@ import { LocaleService } from '../../../core/services/locale.service';
         background: conic-gradient(from 0deg, #ff4500, #ff8c00, #ffd700, #32cd32, #00ced1, #1e90ff, #9370db, #ff1493, #ff4500);
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
       }
-    }
-
-    .theme__palette-icon {
-      color: #ffffff;
-      mix-blend-mode: difference;
-      pointer-events: none;
-      z-index: 1;
     }
 
     .theme__color-input {

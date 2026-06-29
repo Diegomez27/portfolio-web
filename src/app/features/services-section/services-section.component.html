@@ -8,8 +8,36 @@
   <div class="services__grid" [appReveal]="90">
     @for (s of services; track s.num) {
       <article class="card" appTilt>
-        <span class="card__num mono-label">{{ s.num }}</span>
-        <h3 class="card__title">{{ s.titleKey | t }}</h3>
+        <div class="card__head">
+          <span class="card__icon" aria-hidden="true">
+            @switch (s.icon) {
+              @case ('systems') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="9" rx="1" />
+                  <rect x="14" y="3" width="7" height="5" rx="1" />
+                  <rect x="14" y="12" width="7" height="9" rx="1" />
+                  <rect x="3" y="16" width="7" height="5" rx="1" />
+                </svg>
+              }
+              @case ('realtime') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 12h4l3 8 4-16 3 8h4" />
+                </svg>
+              }
+              @case ('web') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M3 12h18" />
+                  <path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18" />
+                </svg>
+              }
+            }
+          </span>
+          <div class="card__heading">
+            <span class="card__num mono-label">{{ s.num }}</span>
+            <h3 class="card__title">{{ s.titleKey | t }}</h3>
+          </div>
+        </div>
         <p class="card__desc">{{ s.descKey | t }}</p>
         <div class="card__tags">
           @for (tag of s.tags; track tag) {

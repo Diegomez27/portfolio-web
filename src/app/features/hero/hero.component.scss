@@ -144,7 +144,7 @@
 .hero__chips-inline {
   position: relative;
   z-index: 2;
-  display: flex;
+  display: none;   // móvil/tablet: se omiten; en desktop salen como chips flotantes
   flex-wrap: wrap;
   gap: 7px;
   margin-top: 16px;
@@ -272,9 +272,6 @@
     }
   }
 
-  .hero__chips-inline { display: none; }   // en desktop, chips flotantes
-  .diagram__chip { display: inline-flex; }
-
   // ── Decorative floating geometry ──────────────
   .diagram__deco {
     display: contents; // children position from .diagram
@@ -332,6 +329,12 @@
       animation-delay: -9s;
     }
   }
+}
+
+// ── Chips flotantes: solo cuando el diagrama tiene ancho de sobra ──
+// Por debajo de esto se usan los chips inline (que envuelven, sin solaparse).
+@media (min-width: 1280px) {
+  .diagram__chip { display: inline-flex; }
 }
 
 // ── Decorative float keyframes ──────────────────

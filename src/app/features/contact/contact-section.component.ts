@@ -46,11 +46,10 @@ export class ContactSectionComponent {
   });
 
   readonly projectTypes: ProjectType[] = [
-    { value: 'Landing page',                    labelKey: 'pt.landing' },
-    { value: 'Sistema de gestión / dashboard',  labelKey: 'pt.dashboard' },
-    { value: 'Integración SAT / fiscal',        labelKey: 'pt.fiscal' },
-    { value: 'SaaS multi-tenant',               labelKey: 'pt.saas' },
-    { value: 'Otro',                            labelKey: 'pt.other' },
+    { value: 'Sistema a la medida',       labelKey: 'pt.systems' },
+    { value: 'App en tiempo real / POS',  labelKey: 'pt.realtime' },
+    { value: 'Landing page / Sitio web',  labelKey: 'pt.landing' },
+    { value: 'Otro',                      labelKey: 'pt.other' },
   ];
 
   readonly links: ContactLink[] = [

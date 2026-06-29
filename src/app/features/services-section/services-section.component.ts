@@ -3,8 +3,11 @@ import { RevealDirective } from '../../shared/directives/reveal.directive';
 import { TiltDirective } from '../../shared/directives/tilt.directive';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
+type ServiceIcon = 'systems' | 'realtime' | 'web';
+
 interface Service {
   num: string;
+  icon: ServiceIcon;
   titleKey: string;
   descKey: string;
   tags: string[];
@@ -21,27 +24,24 @@ export class ServicesSectionComponent {
   readonly services: Service[] = [
     {
       num: '01',
+      icon: 'systems',
       titleKey: 'services.s1.title',
       descKey: 'services.s1.desc',
-      tags: ['Angular', 'NestJS', 'PostgreSQL'],
+      tags: ['CRM', 'Dashboard', 'Roles & Auth'],
     },
     {
       num: '02',
+      icon: 'realtime',
       titleKey: 'services.s2.title',
       descKey: 'services.s2.desc',
-      tags: ['WebSockets', 'Redis', 'Signals'],
+      tags: ['POS', 'WebSockets', 'Tiempo real'],
     },
     {
       num: '03',
+      icon: 'web',
       titleKey: 'services.s3.title',
       descKey: 'services.s3.desc',
-      tags: ['NestJS', 'REST', 'Docker'],
-    },
-    {
-      num: '04',
-      titleKey: 'services.s4.title',
-      descKey: 'services.s4.desc',
-      tags: ['Angular', 'SCSS', 'a11y'],
+      tags: ['Mobile-first', 'Diseño propio', 'Entrega rápida'],
     },
   ];
 }
