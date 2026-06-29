@@ -33,9 +33,8 @@ export class LocaleService {
   private initialLang(): Lang {
     const saved = this.read(LANG_KEY);
     if (saved === 'es' || saved === 'en') return saved;
-    const nav =
-      typeof navigator !== 'undefined' ? navigator.language.toLowerCase() : 'es';
-    return nav.startsWith('en') ? 'en' : 'es';
+    // Default: español para visitantes nuevos (la preferencia se persiste).
+    return 'es';
   }
 
   private setMeta(name: string, content: string): void {

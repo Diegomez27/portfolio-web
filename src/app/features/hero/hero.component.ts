@@ -37,7 +37,7 @@ export class HeroComponent implements AfterViewInit {
     { name: 'Data', tech: 'PostgreSQL · RLS' },
   ];
 
-  readonly chips = ['auth', 'billing', 'multi-tenant', 'api gateway', 'realtime'];
+  readonly chips = ['auth', 'billing', 'multi-tenant', 'api', 'realtime'];
 
   ngAfterViewInit(): void {
     const reduce =

@@ -16,7 +16,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'rail.builtWith': 'Construido con Angular',
 
     // Hero
-    'hero.overline': 'Portafolio · Demos pronto',
+    'hero.overline': 'Full-stack developer · Angular & NestJS',
     'hero.scroll': 'Scroll para explorar',
     'hero.title': 'Hola, soy Diego. Desarrollador <em>full-stack</em>.',
     'hero.sub': 'Diseño y construyo aplicaciones con <strong>Angular</strong> y <strong>NestJS</strong> — interfaces rápidas, APIs bien tipadas y bases de datos sólidas.',
@@ -26,7 +26,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'hero.archLabel': '// arquitectura',
 
     // Trabajo (coming soon)
-    'work.kicker': '02 / Trabajo',
+    'work.kicker': '/ Trabajo',
     'work.title': 'Demos en camino',
     'work.lead': 'Estoy preparando un par de demos funcionales para mostrarlas aquí. Las subiré pronto — mientras tanto, puedes ver con qué construyo en <strong>Servicios</strong> o escribirme en <strong>Contacto</strong>.',
     'work.badge': 'Coming soon',
@@ -34,7 +34,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'work.soonText': 'Los proyectos se publicarán con su demo en vivo. Vuelve pronto.',
 
     // Servicios
-    'services.kicker': '03 / Servicios',
+    'services.kicker': '/ Servicios',
     'services.title': 'Cómo puedo ayudarte',
     'services.lead': 'Trabajo de punta a punta: del modelo de datos a la interfaz. Estos son los tipos de proyectos.',
     'services.s1.title': 'Sistemas empresariales a la medida',
@@ -47,11 +47,15 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'services.s4.desc': 'Interfaces rápidas y accesibles con Angular moderno: signals, lazy-loading y un sistema de diseño consistente.',
 
     // Contacto
-    'contact.kicker': '04 / Contacto',
+    'contact.kicker': '/ Contacto',
     'contact.title': '¿Tienes un sistema en mente?',
     'contact.lead': 'Cuéntame qué quieres construir.',
     'contact.successTitle': '¡Mensaje enviado!',
     'contact.successText': 'Gracias por escribir. Te responderé muy pronto.',
+    'contact.copied': '¡Copiado!',
+    'contact.tooltip.email': 'Copiar correo al portapapeles',
+    'contact.tooltip.github': 'Visitar perfil de GitHub (abre pestaña nueva)',
+    'contact.tooltip.linkedin': 'Visitar perfil de LinkedIn (abre pestaña nueva)',
 
     // Formulario
     'form.name': 'Nombre',
@@ -95,7 +99,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'rail.builtWith': 'Built with Angular',
 
     // Hero
-    'hero.overline': 'Full-stack developer portfolio',
+    'hero.overline': 'Full-stack developer · Angular & NestJS',
     'hero.scroll': 'Scroll to explore',
     'hero.title': "Hi, I'm Diego. <em>Full-stack</em> developer.",
     'hero.sub': 'I design and build apps with <strong>Angular</strong> and <strong>NestJS</strong> — fast interfaces, well-typed APIs and solid databases.',
@@ -105,7 +109,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'hero.archLabel': '// architecture',
 
     // Work (coming soon)
-    'work.kicker': '02 / Work',
+    'work.kicker': '/ Work',
     'work.title': 'Demos on the way',
     'work.lead': "I'm building a couple of working demos to showcase here. Coming soon — meanwhile, see what I build with in <strong>Services</strong> or reach me in <strong>Contact</strong>.",
     'work.badge': 'Coming soon',
@@ -113,7 +117,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'work.soonText': 'Projects will ship with a live demo. Check back soon.',
 
     // Services
-    'services.kicker': '03 / Services',
+    'services.kicker': '/ Services',
     'services.title': 'How I can help',
     'services.lead': 'I work end to end: from the data model to the interface. These are the kinds of projects.',
     'services.s1.title': 'Custom business systems',
@@ -126,11 +130,15 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'services.s4.desc': 'Fast, accessible interfaces with modern Angular: signals, lazy-loading and a consistent design system.',
 
     // Contact
-    'contact.kicker': '04 / Contact',
+    'contact.kicker': '/ Contact',
     'contact.title': 'Got a system in mind?',
     'contact.lead': 'Tell me what you want to build.',
     'contact.successTitle': 'Message sent!',
     'contact.successText': 'Thanks for reaching out. I’ll get back to you soon.',
+    'contact.copied': 'Copied!',
+    'contact.tooltip.email': 'Copy email to clipboard',
+    'contact.tooltip.github': 'Visit GitHub profile (opens in new tab)',
+    'contact.tooltip.linkedin': 'Visit LinkedIn profile (opens in new tab)',
 
     // Form
     'form.name': 'Name',

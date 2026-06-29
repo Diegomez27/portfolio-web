@@ -53,6 +53,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   private wheelListener?: (e: WheelEvent) => void;
+  private keyListener?: (e: KeyboardEvent) => void;
 
   ngAfterViewInit(): void {
     const root = this.scroller.nativeElement;
@@ -101,12 +102,52 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     };
 
     root.addEventListener('wheel', this.wheelListener, { passive: false });
+
+    // Keyboard navigation listener (desktop only, accessibility)
+    this.keyListener = (e: KeyboardEvent) => {
+      if (typeof window !== 'undefined' && window.innerWidth < 1100) return;
+
+      // Avoid capturing navigation shortcuts inside text fields
+      const activeEl = document.activeElement;
+      if (activeEl && (
+        activeEl.tagName === 'INPUT' ||
+        activeEl.tagName === 'TEXTAREA' ||
+        activeEl.tagName === 'SELECT'
+      )) {
+        return;
+      }
+
+      const now = Date.now();
+      if (now - lastScrollTime < throttleTime) return;
+
+      const current = this.nav.active();
+      const idx = this.chapters.findIndex(c => c.id === current);
+
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        if (idx < this.chapters.length - 1) {
+          e.preventDefault();
+          lastScrollTime = now;
+          this.nav.go(this.chapters[idx + 1].id);
+        }
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        if (idx > 0) {
+          e.preventDefault();
+          lastScrollTime = now;
+          this.nav.go(this.chapters[idx - 1].id);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', this.keyListener);
   }
 
   ngOnDestroy(): void {
     this.io?.disconnect();
     if (this.wheelListener && this.scroller) {
       this.scroller.nativeElement.removeEventListener('wheel', this.wheelListener);
+    }
+    if (this.keyListener) {
+      window.removeEventListener('keydown', this.keyListener);
     }
   }
 

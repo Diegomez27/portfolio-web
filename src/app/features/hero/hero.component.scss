@@ -16,6 +16,20 @@
   gap: 22px;
 }
 
+// Badge de disponibilidad (móvil): pill discreta con punto "live"
+.hero__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--ok) 8%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--ok) 22%, var(--line));
+
+  .mono-label { color: var(--ink); }
+}
+
 .hero__overline {
   display: block;
   font-family: var(--font-mono);
@@ -42,18 +56,14 @@
   strong { color: var(--ink); font-weight: 600; }
 }
 
-.hero__stack {
+// Tira de logos al pie del diagrama (sustituye al stack que estaba a la izquierda)
+.diagram__tech {
+  position: relative;
+  z-index: 2;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  &-label { color: var(--muted); }
-
-  &-logos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
 }
 
 .tech {
@@ -80,9 +90,16 @@
 
 .hero__ctas {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-wrap: nowrap;       // móvil: lado a lado, nunca apilados
+  gap: 10px;
   margin-top: 4px;
+
+  .btn {
+    flex: 1 1 0;           // reparten el ancho a partes iguales
+    min-width: 0;
+    white-space: normal;   // permite 2 líneas si el ancho es muy chico
+    padding-inline: 1rem;
+  }
 }
 
 // ── Columna derecha: diagrama ───────────────────
@@ -170,20 +187,28 @@
 
 // ── Reveal escalonado (solo cuando .ready) ──────
 .hero.ready {
+  .hero__status,
   .hero__overline,
   .hero__title,
   .hero__sub,
-  .hero__stack,
   .hero__ctas,
   .diagram {
     animation: dgReveal .6s ease backwards;
   }
-  .hero__overline { animation-delay: .02s; }
-  .hero__title    { animation-delay: .08s; }
-  .hero__sub      { animation-delay: .15s; }
-  .hero__stack    { animation-delay: .22s; }
-  .hero__ctas     { animation-delay: .29s; }
-  .diagram        { animation-delay: .36s; }
+  .hero__status   { animation-delay: .02s; }
+  .hero__overline { animation-delay: .08s; }
+  .hero__title    { animation-delay: .14s; }
+  .hero__sub      { animation-delay: .21s; }
+  .hero__ctas     { animation-delay: .28s; }
+  .diagram        { animation-delay: .35s; }
+
+  // Los logos entran escalonados después del diagrama
+  .diagram__tech .tech {
+    animation: dgReveal .5s ease backwards;
+    @for $i from 1 through 5 {
+      &:nth-child(#{$i}) { animation-delay: #{0.45 + $i * 0.06}s; }
+    }
+  }
 }
 
 // ── Desktop: dos columnas ───────────────────────
@@ -194,7 +219,16 @@
     gap: clamp(40px, 5vw, 88px);
   }
 
+  .hero__status { display: none; }   // en desktop la disponibilidad vive en el rail
+
   .hero__title { font-size: clamp(3rem, 4.7vw, 4.5rem); }
+
+  // En desktop los botones recuperan su ancho natural (no se estiran)
+  .hero__ctas {
+    flex-wrap: wrap;
+    gap: 12px;
+    .btn { flex: 0 0 auto; white-space: nowrap; padding-inline: 1.4rem; }
+  }
 
   .hero__right {
     flex: 1;

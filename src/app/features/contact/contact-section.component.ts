@@ -9,10 +9,14 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
+type LinkIcon = 'email' | 'github' | 'linkedin';
+
 interface ContactLink {
   kind: string;
   value: string;
   href: string;
+  icon: LinkIcon;
+  tooltipKey: string;
 }
 
 interface ProjectType {
@@ -32,6 +36,7 @@ export class ContactSectionComponent {
   private readonly contactService = inject(ContactService);
 
   readonly formState = signal<FormState>('idle');
+  readonly emailCopied = signal<boolean>(false);
 
   readonly form = this.fb.group({
     name:        ['', [Validators.required, Validators.minLength(2)]],
@@ -53,22 +58,40 @@ export class ContactSectionComponent {
       kind: 'Email',
       value: 'diegomez27@outlook.com',
       href: 'mailto:diegomez27@outlook.com',
+      icon: 'email',
+      tooltipKey: 'contact.tooltip.email',
     },
     {
       kind: 'GitHub',
       value: 'github.com/Diegomez27',
       href: 'https://github.com/Diegomez27',
+      icon: 'github',
+      tooltipKey: 'contact.tooltip.github',
     },
     {
       kind: 'LinkedIn',
       value: 'linkedin.com/in/diego-gomez',
       href: 'https://www.linkedin.com/in/diego-alejandro-g%C3%B3mez-serrano-9abbb038a/',
+      icon: 'linkedin',
+      tooltipKey: 'contact.tooltip.linkedin',
     },
   ];
 
   isInvalid(field: string): boolean {
     const ctrl = this.form.get(field);
     return !!(ctrl?.invalid && ctrl?.touched);
+  }
+
+  onLinkClick(e: MouseEvent, l: ContactLink): void {
+    if (l.icon === 'email') {
+      e.preventDefault();
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        navigator.clipboard.writeText(l.value).then(() => {
+          this.emailCopied.set(true);
+          setTimeout(() => this.emailCopied.set(false), 2000);
+        });
+      }
+    }
   }
 
   onSubmit(): void {

@@ -1,23 +1,15 @@
 <section class="hero" [class.ready]="ready()">
   <!-- Columna izquierda -->
   <div class="hero__left">
+    <!-- Estado de disponibilidad (solo móvil; en desktop vive en el rail lateral) -->
+    <span class="hero__status">
+      <span class="live-dot"></span>
+      <span class="mono-label">{{ 'status.available' | t }}</span>
+    </span>
     <span class="hero__overline mono-label">{{ 'hero.overline' | t }}</span>
     <h1 class="hero__title" [innerHTML]="'hero.title' | t"></h1>
 
     <p class="hero__sub" [innerHTML]="'hero.sub' | t"></p>
-
-    <div class="hero__stack">
-      <span class="hero__stack-label mono-label">{{ 'hero.stackLabel' | t }}</span>
-      <div class="hero__stack-logos">
-        @for (t of stack; track t.name) {
-          <span class="tech" [title]="t.name">
-            <img class="tech__logo" [src]="t.logo" [alt]="t.name"
-                 width="22" height="22" loading="lazy">
-            <span class="tech__name">{{ t.name }}</span>
-          </span>
-        }
-      </div>
-    </div>
 
     <div class="hero__ctas">
       <button class="btn btn--accent" appMagnetic (click)="nav.go('work')">
@@ -50,6 +42,17 @@
               <span class="mono-label">{{ t.tech }}</span>
             </div>
           </div>
+        }
+      </div>
+
+      <!-- stack tecnológico: tira de logos al pie del diagrama -->
+      <div class="diagram__tech">
+        @for (t of stack; track t.name) {
+          <span class="tech" [title]="t.name">
+            <img class="tech__logo" [src]="t.logo" [alt]="t.name"
+                 width="20" height="20" loading="lazy">
+            <span class="tech__name">{{ t.name }}</span>
+          </span>
         }
       </div>
 

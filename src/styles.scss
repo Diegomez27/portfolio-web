@@ -3,8 +3,10 @@
 // ──────────────────────────────────────────────
 :root {
   // ── Superficies (claro por defecto) ──
-  --bg:        #F1EDE3;   // hueso cálido (fondo general)
-  --panel:     #FAF7EF;   // tarjetas / paneles / formulario
+  // Off-white tintado sutilmente hacia el carmín de marca (hue ~20, no el cream
+  // genérico hue 40-100). El calor viene de la identidad, no de un default.
+  --bg:        oklch(0.95 0.005 20);   // fondo general (casi blanco, tinte carmín)
+  --panel:     oklch(0.98 0.003 20);   // tarjetas / paneles / formulario
   --surface:   #FFFFFF;   // inputs, previews
 
   // ── Tinta ──
@@ -36,9 +38,9 @@
   --font-body:    'Hanken Grotesk', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, monospace;
 
-  // ── Radios ──
-  --radius-card:  20px;
-  --radius-panel: 22px;
+  // ── Radios ── (ajustados: precisión sobre suavidad)
+  --radius-card:  12px;
+  --radius-panel: 14px;
   --radius-btn:   12px;
   --radius-input: 11px;
   --radius-pill:  999px;
@@ -53,9 +55,9 @@
 }
 
 // ── Variantes de acento ──────────────────────────
-:root[data-accent='blue']    { --accent: #2D6BE4; }
-:root[data-accent='green']   { --accent: #0F8A6B; }
-:root[data-accent='magenta'] { --accent: #D4308A; }
+:root[data-accent='blue']    { --accent: #244D73; }
+:root[data-accent='green']   { --accent: #275A44; }
+:root[data-accent='magenta'] { --accent: #512457; }
 
 // ── Tema oscuro — negro neutro + acentos carmín/tinto ───
 :root[data-theme='dark'] {
@@ -175,7 +177,10 @@ button {
     background: transparent;
     border: 1.5px solid var(--line);
     color: var(--ink);
-    &:hover { border-color: var(--ink); }
+    &:hover {
+      border-color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 5%, transparent);
+    }
   }
 }
 
