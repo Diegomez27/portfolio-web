@@ -124,6 +124,9 @@
   border: 1px solid transparent;
   border-radius: 8px;
   transition: color var(--transition), border-color var(--transition);
+  position: relative;
+  z-index: 1;
+  background: transparent;
 
   .bar {
     width: 18px;
@@ -271,55 +274,75 @@
 
 .rail__orbit {
   width: 100%;
-  max-width: 140px;
-  opacity: 0.6;
+  max-width: 130px;
+  opacity: 0.45;
+  transition: opacity var(--transition);
+  z-index: 2;
 
-  &--sm {
-    max-width: 80px;
+  &:hover {
+    opacity: 0.85;
+  }
 
-    .orbit-sq {
-      transform-origin: 40px 40px;
-    }
+  // Grupos orbitales girando con CSS
+  .orbit-group-1 {
+    transform-origin: 80px 80px;
+    animation: orbitSpin 24s linear infinite;
+  }
+  .orbit-group-2 {
+    transform-origin: 80px 80px;
+    animation: orbitSpin 32s linear infinite reverse;
+  }
+  .orbit-group-3 {
+    transform-origin: 80px 80px;
+    animation: orbitSpin 28s linear infinite;
+  }
+  .orbit-group-4 {
+    transform-origin: 80px 80px;
+    animation: orbitSpin 36s linear infinite reverse;
+  }
+  .orbit-group-5 {
+    transform-origin: 80px 80px;
+    animation: orbitSpin 42s linear infinite;
+  }
 
-    .orbit-dot {
-      transform-origin: 40px 40px;
-    }
-
-    .orbit-inner-dot {
-      transform-origin: 40px 40px;
-      animation: orbitSpin 12s linear infinite;
-    }
-
-    .orbit-dash {
-      transform-origin: 40px 40px;
-      animation: orbitSpin 16s linear infinite reverse;
-    }
-
-    .orbit-inner-sq {
-      transform-origin: 40px 40px;
-      animation: orbitSpin 15s linear infinite;
-    }
-
-    .orbit-outer-dot {
-      transform-origin: 40px 40px;
-      animation: orbitSpin 25s linear infinite reverse;
-    }
+  .orbit-ring-slow {
+    transform-origin: 80px 80px;
+    animation: orbitSpin 50s linear infinite;
+  }
+  .orbit-ring-mid {
+    transform-origin: 80px 80px;
+    animation: orbitSpin 38s linear infinite reverse;
+  }
+  .orbit-ring-fast {
+    transform-origin: 80px 80px;
+    animation: orbitSpin 26s linear infinite;
   }
 }
 
-.orbit-ring {
-  transform-origin: center;
-  animation: orbitSpin 40s linear infinite;
+// Chasis vertical en la barra lateral
+.rail__chasis {
+  display: none;
 }
 
-.orbit-sq {
-  transform-origin: 60px 60px;
-  animation: orbitSpin 20s linear infinite reverse;
-}
+// Indicador deslizante de navegación
+.nav-indicator {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  height: 0;
+  top: 0;
+  background: var(--accent-soft);
+  border-left: 2px solid var(--accent);
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  will-change: transform, height, opacity;
+  transition: opacity 0.3s ease;
 
-.orbit-dot {
-  transform-origin: 60px 60px;
-  animation: orbitSpin 28s linear infinite, orbitPulse 3s ease-in-out infinite;
+  &.visible {
+    opacity: 1;
+  }
 }
 
 @keyframes orbitSpin {
@@ -348,11 +371,14 @@
     border-right: 1px solid var(--line);
     padding: 40px 24px;
     text-align: center;
+    position: relative; // para chasis vertical
 
     .brand {
       flex-direction: column;
       align-items: center;
       text-align: center;
+      position: relative;
+      z-index: 2;
 
       &__name {
         display: flex;
@@ -369,19 +395,51 @@
       display: block;
       margin: 16px 0;
       width: 100%;
+      position: relative;
+      z-index: 2;
     }
 
-    nav {
+    .rail__chasis {
+      display: block;
+      position: absolute;
+      top: 130px;
+      bottom: 150px;
+      left: 50%;
+      width: 1px;
+      border-left: 1px dashed var(--line);
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.55;
+    }
+
+    .rail__nav {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 4px;
       width: 100%;
+      max-width: 180px;
+      margin-inline: auto;
+      position: relative;
+      z-index: 2;
     }
 
     .nav-row {
       width: 100%;
-      padding: 10px 12px;
-      justify-content: center;
+      padding: 10px 16px;
+      justify-content: flex-start;
+      border-radius: 6px;
+      position: relative;
+      z-index: 1;
+      
+      .bar {
+        display: none;
+      }
+
+      &:hover {
+        border-color: transparent;
+        color: var(--ink);
+      }
     }
 
     .status {

@@ -15,6 +15,7 @@ import { ContactSectionComponent } from './features/contact/contact-section.comp
 import { CursorRingDirective } from './shared/directives/cursor-ring.directive';
 import { ThemeControlComponent } from './shared/components/theme-control/theme-control.component';
 import { TranslatePipe } from './shared/pipes/translate.pipe';
+import { animate, stagger, createDrawable, cubicBezier, utils } from 'animejs';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   readonly nav = inject(ChapterService);
 
   @ViewChild('scroller') scroller!: ElementRef<HTMLElement>;
+  @ViewChild('indicator') indicatorRef?: ElementRef<HTMLElement>;
   private io?: IntersectionObserver;
+  private isReady = false;
+  private resizeListener?: () => void;
 
   readonly chapters = [
     { id: 'home',     num: '01', label: 'Inicio'    },
@@ -50,12 +54,39 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       const req = this.nav.request();
       if (req) this.scrollTo(req.chapter);
     });
+
+    // Escuchamos el capítulo activo para mover el indicador deslizante del sidebar
+    effect(() => {
+      const active = this.nav.active();
+      if (this.isReady) {
+        this.updateIndicator(active);
+      }
+    });
   }
 
   private wheelListener?: (e: WheelEvent) => void;
   private keyListener?: (e: KeyboardEvent) => void;
 
   ngAfterViewInit(): void {
+    this.isReady = true;
+
+    // Inicializar el indicador deslizante y listeners de tamaño
+    if (typeof window !== 'undefined') {
+      setTimeout(() => {
+        this.updateIndicator(this.nav.active(), true);
+      }, 150);
+
+      this.resizeListener = () => {
+        this.updateIndicator(this.nav.active(), true);
+      };
+      window.addEventListener('resize', this.resizeListener, { passive: true });
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) {
+        this.initIntroAnimations();
+      }
+    }
+
     const root = this.scroller.nativeElement;
     const views = Array.from(root.querySelectorAll<HTMLElement>('.view'));
 
@@ -149,6 +180,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     if (this.keyListener) {
       window.removeEventListener('keydown', this.keyListener);
     }
+    if (this.resizeListener) {
+      window.removeEventListener('resize', this.resizeListener);
+    }
   }
 
   private scrollTo(c: Chapter): void {
@@ -156,5 +190,97 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     if (!el) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  private updateIndicator(chapterId: string, immediate = false): void {
+    if (typeof window === 'undefined') return;
+    if (window.innerWidth < 1100) return; // solo en desktop
+
+    const navEl = this.scroller.nativeElement.ownerDocument.querySelector('.rail__nav');
+    const indicatorEl = this.indicatorRef?.nativeElement;
+    if (!navEl || !indicatorEl) return;
+
+    const activeBtn = navEl.querySelector(`[data-id="${chapterId}"]`) as HTMLElement;
+    if (!activeBtn) {
+      indicatorEl.classList.remove('visible');
+      return;
+    }
+
+    const navRect = navEl.getBoundingClientRect();
+    const btnRect = activeBtn.getBoundingClientRect();
+
+    const targetTop = btnRect.top - navRect.top;
+    const targetHeight = btnRect.height;
+
+    indicatorEl.classList.add('visible');
+    utils.remove(indicatorEl);
+
+    if (immediate) {
+      indicatorEl.style.transform = `translateY(${targetTop}px)`;
+      indicatorEl.style.height = `${targetHeight}px`;
+    } else {
+      animate(indicatorEl, {
+        translateY: targetTop,
+        height: targetHeight,
+        duration: 380,
+        ease: cubicBezier(0.16, 1, 0.3, 1),
+      });
+    }
+  }
+
+  private initIntroAnimations(): void {
+    // 1. Dibujado de las líneas técnicas (blueprint) en las órbitas SVG.
+    // createDrawable inicia los trazos ocultos (0 0) y los dibuja hasta 0 1.
+    const blueprint = createDrawable('.rail__orbit line, .rail__orbit circle');
+    animate(blueprint, {
+      draw: ['0 0', '0 1'],
+      ease: 'inOutSine',
+      duration: 1200,
+      delay: stagger(60),
+    });
+
+    // 2. Escalado y entrada de los nodos orbitales
+    animate(
+      [
+        '.rail__orbit rect',
+        '.rail__orbit .orbit-node-dot',
+        '.rail__orbit .orbit-node-dot-large',
+        '.rail__orbit .orbit-node-dot-small',
+      ],
+      {
+        scale: [0, 1],
+        opacity: [0, 1],
+        ease: 'outElastic(1, .85)',
+        duration: 1000,
+        delay: 400,
+      },
+    );
+
+    // 3. Stagger (entrada escalonada) de los ítems de navegación en la barra lateral
+    animate('.rail__nav .nav-row', {
+      translateX: [-15, 0],
+      opacity: [0, 1],
+      ease: 'outExpo',
+      duration: 800,
+      delay: stagger(80, { start: 500 }),
+    });
+
+    // 4. Stagger de redes sociales y estado
+    animate('.rail__foot > *', {
+      translateY: [15, 0],
+      opacity: [0, 1],
+      ease: 'outExpo',
+      duration: 800,
+      delay: stagger(60, { start: 800 }),
+    });
+
+    // 5. Rebote continuo de la flecha "scroll para explorar"
+    animate('.scroll-hint__arrow', {
+      translateY: [0, 6],
+      alternate: true,
+      loop: true,
+      ease: 'inOutQuad',
+      duration: 720,
+    });
   }
 }

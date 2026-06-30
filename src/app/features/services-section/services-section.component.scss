@@ -69,6 +69,17 @@
   &:hover &__icon {
     background: color-mix(in srgb, var(--tinto) 18%, transparent);
     border-color: var(--tinto);
+
+    // Animación de sistemas (rectángulos flotantes)
+    .icon-systems rect {
+      animation: rectGridFloat 1.2s ease-in-out infinite alternate;
+      &:nth-child(2) { animation-delay: 0.15s; }
+      &:nth-child(3) { animation-delay: 0.3s; }
+      &:nth-child(4) { animation-delay: 0.45s; }
+    }
+
+    // Los iconos de tiempo real (ECG) y web (globo) se redibujan vía anime.js
+    // (createDrawable) desde services-section.component.ts.
   }
 
   &__num { color: var(--accent-text); }
@@ -97,4 +108,10 @@
     padding: 28px 30px;
     .card__title { font-size: 1.4rem; }
   }
+}
+
+// ── Keyframes para micro-animaciones de iconos de servicios ──
+@keyframes rectGridFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-2.2px); }
 }

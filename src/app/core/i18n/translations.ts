@@ -19,7 +19,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'hero.overline': 'Tecnología modular · Angular & NestJS',
     'hero.scroll': 'Scroll para explorar',
     'hero.title': 'Desarrollo de software <em>a la medida</em> para tu negocio.',
-    'hero.sub': 'Construyo desde cero: el panel interno que reemplaza tu hoja de Excel, el sitio que convierte visitas en llamadas o el sistema que coordina tu equipo en tiempo real.',
+    'hero.sub': 'Desarrollo soluciones reales: la landing page optimizada para captar clientes, el sistema a la medida que centraliza tu administración o el portal interactivo que cotiza y cobra por ti.',
     'hero.stackLabel': 'Stack',
     'hero.ctaWork': 'Ver soluciones',
     'hero.ctaContact': 'Agendar llamada',
@@ -37,7 +37,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'demo.category.sistema': 'Sistema a la medida',
     'demo.category.tiempo-real': 'Tiempo real',
     'demo.category.integración': 'Integración',
-    'demo.cta': 'Ver demo en vivo ↗',
+    'demo.cta': 'Ver demo en vivo',
 
     // Servicios
     'services.kicker': '/ Servicios',
@@ -75,7 +75,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'form.err.projectType': 'Selecciona un tipo de proyecto',
     'form.err.message': 'Mensaje requerido (mínimo 20 caracteres)',
     'form.serverError': 'Hubo un error al enviar. Intenta de nuevo o escríbeme por correo.',
-    'form.submit': 'Enviar mensaje →',
+    'form.submit': 'Enviar mensaje',
     'form.sending': 'Enviando…',
 
     // Tipos de proyecto (el value enviado al backend se mantiene en español)
@@ -105,7 +105,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'hero.overline': 'Modular technology · Angular & NestJS',
     'hero.scroll': 'Scroll to explore',
     'hero.title': 'Custom software development <em>tailored</em> to your business.',
-    'hero.sub': 'I build from scratch: the internal panel that replaces your spreadsheet, the site that turns visits into calls, or the system that keeps your team in sync in real time.',
+    'hero.sub': 'I develop real-world solutions: the landing page optimized to capture customers, the custom system that centralizes your administration, or the interactive portal that quotes and bills for you.',
     'hero.stackLabel': 'Stack',
     'hero.ctaWork': 'See solutions',
     'hero.ctaContact': 'Book a call',
@@ -123,7 +123,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'demo.category.sistema': 'Custom system',
     'demo.category.tiempo-real': 'Real-time',
     'demo.category.integración': 'Integration',
-    'demo.cta': 'See live demo ↗',
+    'demo.cta': 'See live demo',
 
     // Services
     'services.kicker': '/ Services',
@@ -161,7 +161,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'form.err.projectType': 'Select a project type',
     'form.err.message': 'Message required (min 20 characters)',
     'form.serverError': 'Something went wrong. Try again or email me directly.',
-    'form.submit': 'Send message →',
+    'form.submit': 'Send message',
     'form.sending': 'Sending…',
 
     // Project types (backend value stays in Spanish)

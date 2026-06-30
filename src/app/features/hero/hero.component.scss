@@ -46,6 +46,7 @@
   letter-spacing: -0.03em;
   text-wrap: balance;
   max-width: 15ch;
+  perspective: 760px;   // profundidad para el giro 3D letra por letra
   ::ng-deep em { color: var(--accent-text); font-style: normal; }
 }
 
@@ -178,36 +179,27 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
-  &.c0 { top: 6%;  right: 4%;  }
-  &.c1 { top: 30%; right: -6%; }
-  &.c2 { bottom: 18%; right: -2%; }
-  &.c3 { bottom: 2%;  left: 8%;  }
-  &.c4 { top: -3%;  left: 18%;  }
+  &.c0 { top: -8%;  right: 12%; }
+  &.c1 { top: 22%;  right: -16%; }
+  &.c2 { bottom: 16%; right: -12%; }
+  &.c3 { bottom: -10%; left: 4%; }
+  &.c4 { top: -14%; left: 8%; }
 }
 
-// ── Reveal escalonado (solo cuando .ready) ──────
-.hero.ready {
-  .hero__status,
+// ── Pre-oculta elementos antes de que anime.js los anime ──
+// Evita el FOUC: cuando .ready no está, los elementos son invisibles.
+// Cuando JS no puede correr (SSR, no-JS), el fallback es mostrarlos igual.
+.hero:not(.ready) {
   .hero__overline,
   .hero__title,
   .hero__sub,
-  .hero__ctas,
-  .diagram {
-    animation: dgReveal .6s ease backwards;
-  }
-  .hero__status   { animation-delay: .02s; }
-  .hero__overline { animation-delay: .08s; }
-  .hero__title    { animation-delay: .14s; }
-  .hero__sub      { animation-delay: .21s; }
-  .hero__ctas     { animation-delay: .28s; }
-  .diagram        { animation-delay: .35s; }
-
-  // Los logos entran escalonados después del diagrama
-  .diagram__tech .tech {
-    animation: dgReveal .5s ease backwards;
-    @for $i from 1 through 5 {
-      &:nth-child(#{$i}) { animation-delay: #{0.45 + $i * 0.06}s; }
-    }
+  .hero__ctas .btn,
+  .diagram__label,
+  .diagram__stack .tier,
+  .diagram__tech .tech,
+  .diagram__chip,
+  .diagram__deco svg {
+    opacity: 0;
   }
 }
 
@@ -259,6 +251,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: visible; // permite que los chips floten hacia afuera sin recortarse
 
     &::before { display: none; }   // lo reemplaza el canvas interactivo
 

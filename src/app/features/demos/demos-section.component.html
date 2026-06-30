@@ -5,7 +5,7 @@
     <p class="work__lead" [innerHTML]="'work.lead' | t"></p>
   </header>
 
-  <div class="demos">
+  <div class="demos" [appReveal]="120">
     @for (demo of demos; track demo.id) {
       <a
         class="demo"
@@ -35,7 +35,9 @@
             }
           </ul>
 
-          <span class="demo__cta">{{ 'demo.cta' | t }}</span>
+          <span class="demo__cta">
+            {{ 'demo.cta' | t }} <span class="arrow">↗</span>
+          </span>
         </div>
       </a>
     }

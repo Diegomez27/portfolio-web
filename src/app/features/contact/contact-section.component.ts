@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, ElementRef, effect, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import {
   ContactService,
@@ -6,6 +6,7 @@ import {
 } from '../../core/services/contact.service';
 import { RevealDirective } from '../../shared/directives/reveal.directive';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { animate, createDrawable } from 'animejs';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -34,9 +35,23 @@ interface ProjectType {
 export class ContactSectionComponent {
   private readonly fb = inject(FormBuilder);
   private readonly contactService = inject(ContactService);
+  private readonly host: ElementRef<HTMLElement> = inject(ElementRef);
 
   readonly formState = signal<FormState>('idle');
   readonly emailCopied = signal<boolean>(false);
+
+  constructor() {
+    // Reacciona al resultado del envío para animar la respuesta del formulario.
+    effect(() => {
+      const state = this.formState();
+      if (this.reduce()) return;
+      if (state === 'success') {
+        requestAnimationFrame(() => this.animateSuccess());
+      } else if (state === 'error') {
+        requestAnimationFrame(() => this.animateError());
+      }
+    });
+  }
 
   readonly form = this.fb.group({
     name:        ['', [Validators.required, Validators.minLength(2)]],
@@ -118,5 +133,64 @@ export class ContactSectionComponent {
         this.formState.set('error');
       },
     });
+  }
+
+  /** Entrada del bloque de éxito: escala + dibujado del checkmark. */
+  private animateSuccess(): void {
+    const block =
+      this.host.nativeElement.querySelector<HTMLElement>('.contact__success');
+    if (!block) return;
+
+    animate(block, {
+      opacity: [0, 1],
+      scale: [0.92, 1],
+      duration: 480,
+      ease: 'outExpo',
+    });
+
+    const icon = block.querySelector<HTMLElement>('.contact__success-icon');
+    if (icon) {
+      animate(icon, { scale: [0, 1], duration: 620, ease: 'outBack', delay: 90 });
+    }
+
+    const check = block.querySelector<SVGPathElement>('.contact__success-icon path');
+    if (check) {
+      const [drawable] = createDrawable(check);
+      animate(drawable, {
+        draw: ['0 0', '0 1'],
+        duration: 560,
+        ease: 'outQuad',
+        delay: 240,
+      });
+    }
+  }
+
+  /** Error de envío: sacude el formulario y revela el mensaje. */
+  private animateError(): void {
+    const form = this.host.nativeElement.querySelector<HTMLElement>('.form');
+    if (form) {
+      animate(form, {
+        translateX: [0, -9, 8, -6, 5, -2, 0],
+        duration: 460,
+        ease: 'inOutSine',
+      });
+    }
+    const err =
+      this.host.nativeElement.querySelector<HTMLElement>('.form__server-error');
+    if (err) {
+      animate(err, {
+        opacity: [0, 1],
+        translateY: [-6, 0],
+        duration: 340,
+        ease: 'outExpo',
+      });
+    }
+  }
+
+  private reduce(): boolean {
+    return (
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
   }
 }

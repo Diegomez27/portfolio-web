@@ -11,10 +11,12 @@ interface Demo {
   imgUrl: string;
 }
 
+import { RevealDirective } from '../../shared/directives/reveal.directive';
+
 @Component({
   selector: 'app-demos-section',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, RevealDirective],
   templateUrl: './demos-section.component.html',
   styleUrl: './demos-section.component.scss',
 })

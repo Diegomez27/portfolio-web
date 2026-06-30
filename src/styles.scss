@@ -241,16 +241,8 @@ button {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-// Reveal escalonado al hacer scroll (directiva appReveal)
-.reveal > * {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.reveal-in > * {
-  opacity: 1;
-  transform: none;
-}
+// El reveal escalonado al hacer scroll ahora lo gestiona la directiva appReveal
+// con anime.js v4 (animate + onScroll), sin clases CSS.
 
 // Respeta usuarios sensibles al movimiento
 @media (prefers-reduced-motion: reduce) {
