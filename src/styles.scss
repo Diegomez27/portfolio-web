@@ -174,12 +174,20 @@ button {
   }
 
   &--outline {
-    background: transparent;
-    border: 1.5px solid var(--line);
+    background: linear-gradient(
+      180deg,
+      var(--surface),
+      color-mix(in srgb, var(--ink) 4%, var(--surface))
+    );
+    border: 1.5px solid color-mix(in srgb, var(--ink) 14%, var(--line));
     color: var(--ink);
+    box-shadow: 0 1px 0 color-mix(in srgb, #fff 60%, transparent) inset,
+                0 6px 16px -10px rgba(20, 19, 15, 0.45);
     &:hover {
-      border-color: var(--ink);
-      background: color-mix(in srgb, var(--ink) 5%, transparent);
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+      box-shadow: 0 1px 0 color-mix(in srgb, #fff 60%, transparent) inset,
+                  0 10px 22px -12px rgba(20, 19, 15, 0.55);
     }
   }
 }

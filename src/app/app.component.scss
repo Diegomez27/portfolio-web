@@ -168,7 +168,7 @@
   flex: 1;
   overflow-y: auto;
   scroll-behavior: smooth;
-  padding-bottom: 88px; // espacio para el tab bar inferior (móvil)
+  padding-bottom: 100px; // espacio para el tab bar inferior (móvil)
 }
 
 // ── Tab bar inferior (móvil) ────────────────────
@@ -180,7 +180,7 @@
   z-index: 50;
   display: flex;
   justify-content: space-around;
-  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  padding: 13px 12px calc(16px + env(safe-area-inset-bottom));
   background: color-mix(in srgb, var(--bg) 90%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -191,7 +191,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 6px;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 10px;

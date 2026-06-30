@@ -30,6 +30,16 @@ export class DemosSectionComponent {
       imgUrl:
         'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
     },
+    {
+      id: 'barber',
+      titleKey: 'demo.barber.title',
+      descKey: 'demo.barber.desc',
+      category: 'landing',
+      tags: ['Angular 20', 'SCSS', 'Mobile-first'],
+      url: 'https://demo-barber-lilac.vercel.app/',
+      imgUrl:
+        'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
+    },
   ];
 
   readonly categoryKey: Record<Demo['category'], string> = {

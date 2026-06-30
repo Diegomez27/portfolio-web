@@ -16,21 +16,23 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'rail.builtWith': 'Construido con Angular',
 
     // Hero
-    'hero.overline': 'Full-stack developer · Angular & NestJS',
+    'hero.overline': 'Desarrollo web a la medida · Angular & NestJS',
     'hero.scroll': 'Scroll para explorar',
-    'hero.title': 'Hola, soy Diego. Desarrollador <em>full-stack</em>.',
-    'hero.sub': 'Diseño y construyo aplicaciones con <strong>Angular</strong> y <strong>NestJS</strong> — interfaces rápidas, APIs bien tipadas y bases de datos sólidas.',
+    'hero.title': 'Sistemas digitales para negocios que quieren crecer — sin agencias caras ni freelancers desaparecidos.',
+    'hero.sub': 'Construyo desde cero: el panel interno que reemplaza tu hoja de Excel, el sitio que convierte visitas en llamadas o el sistema que coordina tu equipo en tiempo real.',
     'hero.stackLabel': 'Stack',
-    'hero.ctaWork': 'Ver los proyectos',
+    'hero.ctaWork': 'Ver soluciones',
     'hero.ctaContact': 'Agendar llamada',
     'hero.archLabel': '// arquitectura',
 
     // Proyectos (demos en vivo)
-    'work.kicker': '/ Proyectos',
-    'work.title': 'Pruébalo tú mismo',
-    'work.lead': 'Proyectos reales desplegados. Cada uno demuestra una capacidad distinta — puedes usarlos ahora mismo.',
+    'work.kicker': '/ Soluciones de referencia',
+    'work.title': 'Así se ve en producción',
+    'work.lead': 'Cada solución está construida para un tipo de negocio real — puedes explorarla ahora mismo y ver exactamente lo que recibirías.',
     'demo.cafe.title': 'Café Raíces',
-    'demo.cafe.desc': 'Landing de cafetería con menú filtrable por categoría y formulario de reserva. Diseño mobile-first, sin backend.',
+    'demo.cafe.desc': 'Sitio web para negocio de café o restaurante: menú digital por categoría, formulario de reserva y diseño mobile-first listo para Google. Sin backend — carga instantánea.',
+    'demo.barber.title': 'Barbería Élite',
+    'demo.barber.desc': 'Sitio web para barbería: galería de cortes, servicios con precios, formulario de cita y diseño mobile-first. Sin backend — carga instantánea.',
     'demo.category.landing': 'Presencia web',
     'demo.category.sistema': 'Sistema a la medida',
     'demo.category.tiempo-real': 'Tiempo real',
@@ -50,8 +52,8 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
 
     // Contacto
     'contact.kicker': '/ Contacto',
-    'contact.title': '¿Tienes un sistema en mente?',
-    'contact.lead': 'Cuéntame qué quieres construir.',
+    'contact.title': '¿Tu negocio necesita un sistema, una app o un sitio web?',
+    'contact.lead': 'Cuéntame en 2 líneas qué necesitas. Te respondo en menos de 24 horas.',
     'contact.successTitle': '¡Mensaje enviado!',
     'contact.successText': 'Gracias por escribir. Te responderé muy pronto.',
     'contact.copied': '¡Copiado!',
@@ -83,8 +85,8 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'pt.other': 'Otro',
 
     // Meta
-    'meta.title': 'Diego — Desarrollador full-stack',
-    'meta.desc': 'Desarrollo aplicaciones web full-stack con Angular y NestJS — interfaces rápidas, APIs bien tipadas y bases de datos sólidas.',
+    'meta.title': 'Diego Gómez · Desarrollo web a la medida para negocios',
+    'meta.desc': 'Sistemas digitales, apps en tiempo real y presencia web para negocios. Trabajo de punta a punta: diseño, desarrollo y deploy.',
   },
 
   en: {
@@ -100,21 +102,23 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'rail.builtWith': 'Built with Angular',
 
     // Hero
-    'hero.overline': 'Full-stack developer · Angular & NestJS',
+    'hero.overline': 'Custom web development · Angular & NestJS',
     'hero.scroll': 'Scroll to explore',
-    'hero.title': "Hi, I'm Diego. <em>Full-stack</em> developer.",
-    'hero.sub': 'I design and build apps with <strong>Angular</strong> and <strong>NestJS</strong> — fast interfaces, well-typed APIs and solid databases.',
+    'hero.title': 'Digital systems for businesses ready to grow — no big agencies, no ghost freelancers.',
+    'hero.sub': 'I build from scratch: the internal panel that replaces your spreadsheet, the site that turns visits into calls, or the system that keeps your team in sync in real time.',
     'hero.stackLabel': 'Stack',
-    'hero.ctaWork': 'See the work',
+    'hero.ctaWork': 'See solutions',
     'hero.ctaContact': 'Book a call',
     'hero.archLabel': '// architecture',
 
     // Projects (live demos)
-    'work.kicker': '/ Projects',
-    'work.title': 'Try it yourself',
-    'work.lead': 'Real projects, deployed. Each one demonstrates a different capability — you can use them right now.',
+    'work.kicker': '/ Reference solutions',
+    'work.title': 'This is what you get',
+    'work.lead': 'Each solution is built for a real type of business — explore it now and see exactly what you would receive.',
     'demo.cafe.title': 'Café Raíces',
-    'demo.cafe.desc': 'Café landing with filterable menu by category and reservation form. Mobile-first design, no backend.',
+    'demo.cafe.desc': 'Website for a café or restaurant: digital menu by category, reservation form and mobile-first design ready for Google. No backend — instant load.',
+    'demo.barber.title': 'Barbería Élite',
+    'demo.barber.desc': 'Website for a barbershop: haircut gallery, services with pricing, appointment form and mobile-first design. No backend — instant load.',
     'demo.category.landing': 'Web presence',
     'demo.category.sistema': 'Custom system',
     'demo.category.tiempo-real': 'Real-time',
@@ -134,8 +138,8 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
 
     // Contact
     'contact.kicker': '/ Contact',
-    'contact.title': 'Got a system in mind?',
-    'contact.lead': 'Tell me what you want to build.',
+    'contact.title': 'Does your business need a system, an app or a website?',
+    'contact.lead': "Tell me in 2 lines what you need. I'll get back to you within 24 hours.",
     'contact.successTitle': 'Message sent!',
     'contact.successText': 'Thanks for reaching out. I’ll get back to you soon.',
     'contact.copied': 'Copied!',
@@ -167,7 +171,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'pt.other': 'Other',
 
     // Meta
-    'meta.title': 'Diego — Full-stack developer',
-    'meta.desc': 'I build full-stack web apps with Angular and NestJS — fast interfaces, well-typed APIs and solid databases.',
+    'meta.title': 'Diego Gómez · Custom web development for businesses',
+    'meta.desc': 'Custom systems, real-time apps and web presence for businesses. End-to-end: design, development and deploy.',
   },
 };
