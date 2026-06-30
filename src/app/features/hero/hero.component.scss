@@ -46,7 +46,7 @@
   letter-spacing: -0.03em;
   text-wrap: balance;
   max-width: 15ch;
-  em { color: var(--accent-text); font-style: normal; }
+  ::ng-deep em { color: var(--accent-text); font-style: normal; }
 }
 
 .hero__sub {

@@ -16,9 +16,9 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'rail.builtWith': 'Construido con Angular',
 
     // Hero
-    'hero.overline': 'Desarrollo web a la medida · Angular & NestJS',
+    'hero.overline': 'Tecnología modular · Angular & NestJS',
     'hero.scroll': 'Scroll para explorar',
-    'hero.title': 'Sistemas digitales para negocios que quieren crecer — sin agencias caras ni freelancers desaparecidos.',
+    'hero.title': 'Desarrollo de software <em>a la medida</em> para tu negocio.',
     'hero.sub': 'Construyo desde cero: el panel interno que reemplaza tu hoja de Excel, el sitio que convierte visitas en llamadas o el sistema que coordina tu equipo en tiempo real.',
     'hero.stackLabel': 'Stack',
     'hero.ctaWork': 'Ver soluciones',
@@ -102,9 +102,9 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'rail.builtWith': 'Built with Angular',
 
     // Hero
-    'hero.overline': 'Custom web development · Angular & NestJS',
+    'hero.overline': 'Modular technology · Angular & NestJS',
     'hero.scroll': 'Scroll to explore',
-    'hero.title': 'Digital systems for businesses ready to grow — no big agencies, no ghost freelancers.',
+    'hero.title': 'Custom software development <em>tailored</em> to your business.',
     'hero.sub': 'I build from scratch: the internal panel that replaces your spreadsheet, the site that turns visits into calls, or the system that keeps your team in sync in real time.',
     'hero.stackLabel': 'Stack',
     'hero.ctaWork': 'See solutions',
