@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
+interface Demo {
+  id: string;
+  titleKey: string;
+  descKey: string;
+  category: 'landing' | 'sistema' | 'tiempo-real' | 'integración';
+  tags: string[];
+  url: string;
+  imgUrl: string;
+}
+
 @Component({
   selector: 'app-demos-section',
   standalone: true,
@@ -8,4 +18,24 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
   templateUrl: './demos-section.component.html',
   styleUrl: './demos-section.component.scss',
 })
-export class DemosSectionComponent {}
+export class DemosSectionComponent {
+  readonly demos: Demo[] = [
+    {
+      id: 'cafe',
+      titleKey: 'demo.cafe.title',
+      descKey: 'demo.cafe.desc',
+      category: 'landing',
+      tags: ['Angular 20', 'SCSS', 'Mobile-first'],
+      url: 'https://demo-cafeteria-rho.vercel.app/',
+      imgUrl:
+        'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
+    },
+  ];
+
+  readonly categoryKey: Record<Demo['category'], string> = {
+    landing: 'demo.category.landing',
+    sistema: 'demo.category.sistema',
+    'tiempo-real': 'demo.category.tiempo-real',
+    integración: 'demo.category.integración',
+  };
+}

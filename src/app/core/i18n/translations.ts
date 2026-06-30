@@ -6,7 +6,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
   es: {
     // Navegación
     'nav.home': 'Inicio',
-    'nav.work': 'Trabajo',
+    'nav.work': 'Proyectos',
     'nav.services': 'Servicios',
     'nav.contact': 'Contacto',
 
@@ -25,13 +25,17 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'hero.ctaContact': 'Agendar llamada',
     'hero.archLabel': '// arquitectura',
 
-    // Trabajo (coming soon)
-    'work.kicker': '/ Trabajo',
-    'work.title': 'Demos en camino',
-    'work.lead': 'Estoy preparando un par de demos funcionales para mostrarlas aquí. Las subiré pronto — mientras tanto, puedes ver con qué construyo en <strong>Servicios</strong> o escribirme en <strong>Contacto</strong>.',
-    'work.badge': 'Coming soon',
-    'work.soonTitle': 'Trabajo en progreso',
-    'work.soonText': 'Los proyectos se publicarán con su demo en vivo. Vuelve pronto.',
+    // Proyectos (demos en vivo)
+    'work.kicker': '/ Proyectos',
+    'work.title': 'Pruébalo tú mismo',
+    'work.lead': 'Proyectos reales desplegados. Cada uno demuestra una capacidad distinta — puedes usarlos ahora mismo.',
+    'demo.cafe.title': 'Café Raíces',
+    'demo.cafe.desc': 'Landing de cafetería con menú filtrable por categoría y formulario de reserva. Diseño mobile-first, sin backend.',
+    'demo.category.landing': 'Presencia web',
+    'demo.category.sistema': 'Sistema a la medida',
+    'demo.category.tiempo-real': 'Tiempo real',
+    'demo.category.integración': 'Integración',
+    'demo.cta': 'Ver demo en vivo ↗',
 
     // Servicios
     'services.kicker': '/ Servicios',
@@ -86,7 +90,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
   en: {
     // Navigation
     'nav.home': 'Home',
-    'nav.work': 'Work',
+    'nav.work': 'Projects',
     'nav.services': 'Services',
     'nav.contact': 'Contact',
 
@@ -105,13 +109,17 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'hero.ctaContact': 'Book a call',
     'hero.archLabel': '// architecture',
 
-    // Work (coming soon)
-    'work.kicker': '/ Work',
-    'work.title': 'Demos on the way',
-    'work.lead': "I'm building a couple of working demos to showcase here. Coming soon — meanwhile, see what I build with in <strong>Services</strong> or reach me in <strong>Contact</strong>.",
-    'work.badge': 'Coming soon',
-    'work.soonTitle': 'Work in progress',
-    'work.soonText': 'Projects will ship with a live demo. Check back soon.',
+    // Projects (live demos)
+    'work.kicker': '/ Projects',
+    'work.title': 'Try it yourself',
+    'work.lead': 'Real projects, deployed. Each one demonstrates a different capability — you can use them right now.',
+    'demo.cafe.title': 'Café Raíces',
+    'demo.cafe.desc': 'Café landing with filterable menu by category and reservation form. Mobile-first design, no backend.',
+    'demo.category.landing': 'Web presence',
+    'demo.category.sistema': 'Custom system',
+    'demo.category.tiempo-real': 'Real-time',
+    'demo.category.integración': 'Integration',
+    'demo.cta': 'See live demo ↗',
 
     // Services
     'services.kicker': '/ Services',

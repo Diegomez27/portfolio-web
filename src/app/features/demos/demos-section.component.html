@@ -5,12 +5,39 @@
     <p class="work__lead" [innerHTML]="'work.lead' | t"></p>
   </header>
 
-  <div class="soon">
-    <span class="soon__badge">
-      <span class="soon__dot"></span>
-      <span class="mono-label">{{ 'work.badge' | t }}</span>
-    </span>
-    <h3 class="soon__title">{{ 'work.soonTitle' | t }}</h3>
-    <p class="soon__text">{{ 'work.soonText' | t }}</p>
+  <div class="demos">
+    @for (demo of demos; track demo.id) {
+      <a
+        class="demo"
+        [href]="demo.url"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="demo__media">
+          <img
+            class="demo__img"
+            [src]="demo.imgUrl"
+            [alt]="demo.titleKey | t"
+            loading="lazy"
+          />
+          <span class="demo__badge mono-label">
+            {{ categoryKey[demo.category] | t }}
+          </span>
+        </div>
+
+        <div class="demo__body">
+          <h3 class="demo__title">{{ demo.titleKey | t }}</h3>
+          <p class="demo__desc">{{ demo.descKey | t }}</p>
+
+          <ul class="demo__tags">
+            @for (tag of demo.tags; track tag) {
+              <li class="demo__tag">{{ tag }}</li>
+            }
+          </ul>
+
+          <span class="demo__cta">{{ 'demo.cta' | t }}</span>
+        </div>
+      </a>
+    }
   </div>
 </div>
