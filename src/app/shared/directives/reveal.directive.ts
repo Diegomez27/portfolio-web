@@ -43,7 +43,11 @@ export class RevealDirective implements OnInit, OnDestroy {
     this.observer = onScroll({
       container,
       target: el,
-      enter: 'bottom 85%',
+      // Sintaxis anime.js: '<posición en viewport> <posición en el elemento>'.
+      // '85% top' = dispara cuando el BORDE SUPERIOR del elemento entra al 85% de
+      // la pantalla. Con '85%' fijo al elemento, las secciones altas (contacto en
+      // móvil) entraban tarde y pedían scrollear casi toda la sección.
+      enter: '85% top',
     });
 
     this.anim = animate(children, {
