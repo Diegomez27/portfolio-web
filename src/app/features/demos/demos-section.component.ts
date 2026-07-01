@@ -42,6 +42,16 @@ export class DemosSectionComponent {
       imgUrl:
         'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
     },
+    {
+      id: 'consultorio',
+      titleKey: 'demo.consultorio.title',
+      descKey: 'demo.consultorio.desc',
+      category: 'landing',
+      tags: ['Angular 20', 'SCSS', 'Mobile-first'],
+      url: 'https://demo-consultorio.vercel.app/',
+      imgUrl:
+        'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80',
+    },
   ];
 
   readonly categoryKey: Record<Demo['category'], string> = {
