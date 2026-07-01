@@ -43,8 +43,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   readonly chapters = [
     { id: 'home',     num: '01', label: 'Inicio'    },
-    { id: 'work',     num: '02', label: 'Trabajo'   },
-    { id: 'services', num: '03', label: 'Servicios' },
+    { id: 'services', num: '02', label: 'Servicios' },
+    { id: 'work',     num: '03', label: 'Trabajo'   },
     { id: 'contact',  num: '04', label: 'Contacto'  },
   ] as const;
 
