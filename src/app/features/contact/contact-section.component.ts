@@ -54,17 +54,17 @@ export class ContactSectionComponent {
   }
 
   readonly form = this.fb.group({
-    name:        ['', [Validators.required, Validators.minLength(2)]],
-    email:       ['', [Validators.required, Validators.email]],
+    name: ['', [Validators.required, Validators.minLength(2)]],
+    email: ['', [Validators.required, Validators.email]],
     projectType: ['', Validators.required],
-    message:     ['', [Validators.required, Validators.minLength(20)]],
+    message: ['', [Validators.required, Validators.minLength(20)]],
   });
 
   readonly projectTypes: ProjectType[] = [
-    { value: 'Sistema a la medida',       labelKey: 'pt.systems' },
-    { value: 'App en tiempo real / POS',  labelKey: 'pt.realtime' },
-    { value: 'Landing page / Sitio web',  labelKey: 'pt.landing' },
-    { value: 'Otro',                      labelKey: 'pt.other' },
+    { value: 'Sistema a la medida', labelKey: 'pt.systems' },
+    { value: 'App en tiempo real / POS', labelKey: 'pt.realtime' },
+    { value: 'Landing page / Sitio web', labelKey: 'pt.landing' },
+    { value: 'Otro', labelKey: 'pt.other' },
   ];
 
   readonly links: ContactLink[] = [
