@@ -28,7 +28,7 @@ export class DemosSectionComponent {
       descKey: 'demo.cafe.desc',
       category: 'landing',
       tags: ['Angular 20', 'SCSS', 'Mobile-first'],
-      url: 'https://demo-cafeteria-rho.vercel.app/',
+      url: 'https://cafeteria.diego-gomez-desarrollo-web.com/',
       imgUrl:
         'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
     },
@@ -38,7 +38,7 @@ export class DemosSectionComponent {
       descKey: 'demo.barber.desc',
       category: 'landing',
       tags: ['Angular 20', 'SCSS', 'Mobile-first'],
-      url: 'https://demo-barber-lilac.vercel.app/',
+      url: 'https://barber.diego-gomez-desarrollo-web.com/',
       imgUrl:
         'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
     },
@@ -48,7 +48,7 @@ export class DemosSectionComponent {
       descKey: 'demo.consultorio.desc',
       category: 'landing',
       tags: ['Angular 20', 'SCSS', 'Mobile-first'],
-      url: 'https://demo-consultorio.vercel.app/',
+      url: 'https://consultorio.diego-gomez-desarrollo-web.com/',
       imgUrl:
         'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80',
     },
