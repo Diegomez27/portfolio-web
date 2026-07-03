@@ -6,10 +6,11 @@ import {
 } from '@angular/core';
 import { ChapterService } from '../../core/services/chapter.service';
 import { ParallaxDirective } from '../../shared/directives/parallax.directive';
+import { ScrollParallaxDirective } from '../../shared/directives/scroll-parallax.directive';
 import { MagneticDirective } from '../../shared/directives/magnetic.directive';
 import { DotGridComponent } from '../../shared/components/dot-grid/dot-grid.component';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
-import { animate, createTimeline, stagger, scrambleText, utils, text } from 'animejs';
+import { animate, createTimeline, stagger, scrambleText, svg, utils, text } from 'animejs';
 
 /** Todos los elementos que entran con la animación de intro del hero. */
 const INTRO_TARGETS =
@@ -20,7 +21,13 @@ const INTRO_TARGETS =
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [ParallaxDirective, MagneticDirective, DotGridComponent, TranslatePipe],
+  imports: [
+    ParallaxDirective,
+    ScrollParallaxDirective,
+    MagneticDirective,
+    DotGridComponent,
+    TranslatePipe,
+  ],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
@@ -121,13 +128,20 @@ export class HeroComponent implements AfterViewInit {
         ease: 'outExpo',
         delay: stagger(70),
       }, 180)
+      // Pills del stack: pop elástico, cada logo entra girando sobre sí mismo.
       .add('.diagram__tech .tech', {
-        scale: [0.85, 1],
+        scale: [0.5, 1],
         opacity: [0, 1],
-        duration: 500,
-        ease: 'outBack',
-        delay: stagger(50),
+        duration: 640,
+        ease: 'outElastic(1, 0.6)',
+        delay: stagger(65),
       }, 440)
+      .add('.diagram__tech .tech__logo', {
+        rotate: [-180, 0],
+        duration: 700,
+        ease: 'outBack',
+        delay: stagger(65),
+      }, 470)
       .add('.diagram__chip', {
         opacity: [0, 1],
         duration: 520,
@@ -141,6 +155,35 @@ export class HeroComponent implements AfterViewInit {
         ease: 'outExpo',
         delay: stagger(55),
       }, '<');
+
+    // Solo desktop (la deco es display:none en móvil): los contornos geométricos
+    // se dibujan trazo a trazo con el módulo svg de anime.js.
+    if (window.matchMedia('(min-width: 1100px)').matches) {
+      tl.add(
+        svg.createDrawable(
+          '.deco--sq rect, .deco--cross path, .deco--ring circle, .deco--diamond rect',
+        ),
+        {
+          draw: ['0 0', '0 1'],
+          duration: 1100,
+          ease: 'outQuart',
+          delay: stagger(120),
+        },
+        560,
+      );
+    }
+
+    // Vida en reposo: una ola sutil recorre los logos del stack cada pocos
+    // segundos — el desfase del stagger se conserva en cada loop.
+    animate('.diagram__tech .tech__logo', {
+      translateY: [
+        { to: -4, duration: 260, ease: 'outQuad' },
+        { to: 0, duration: 500, ease: 'outBack' },
+      ],
+      delay: stagger(100, { start: 2400 }),
+      loop: true,
+      loopDelay: 3600,
+    });
 
     // Loop sutil de la flecha del CTA principal para invitar al clic.
     animate('.hero__ctas .btn--accent svg', {

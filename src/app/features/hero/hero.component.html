@@ -8,7 +8,6 @@
     </span>
     <span class="hero__overline mono-label">{{ 'hero.overline' | t }}</span>
     <h1 class="hero__title" [innerHTML]="'hero.title' | t"></h1>
-
     <p class="hero__sub" [innerHTML]="'hero.sub' | t"></p>
 
     <div class="hero__ctas">
@@ -27,7 +26,7 @@
 
   <!-- Columna derecha: diagrama de arquitectura (tarjeta en móvil, lienzo en desktop) -->
   <div class="hero__right" aria-hidden="true">
-    <div class="diagram" [appParallax]="10">
+    <div class="diagram" [appParallax]="10" [appScrollParallax]="12">
       <!-- dot-grid interactivo (solo desktop) -->
       <app-dot-grid class="diagram__canvas" />
 
