@@ -269,7 +269,7 @@
 
 // ── Sidebar orbital decoration ──────────────────
 .rail__deco {
-  display: none;  // visible solo en desktop
+  display: none; // visible solo en desktop
 }
 
 .rail__orbit {
@@ -288,18 +288,22 @@
     transform-origin: 80px 80px;
     animation: orbitSpin 24s linear infinite;
   }
+
   .orbit-group-2 {
     transform-origin: 80px 80px;
     animation: orbitSpin 32s linear infinite reverse;
   }
+
   .orbit-group-3 {
     transform-origin: 80px 80px;
     animation: orbitSpin 28s linear infinite;
   }
+
   .orbit-group-4 {
     transform-origin: 80px 80px;
     animation: orbitSpin 36s linear infinite reverse;
   }
+
   .orbit-group-5 {
     transform-origin: 80px 80px;
     animation: orbitSpin 42s linear infinite;
@@ -309,10 +313,12 @@
     transform-origin: 80px 80px;
     animation: orbitSpin 50s linear infinite;
   }
+
   .orbit-ring-mid {
     transform-origin: 80px 80px;
     animation: orbitSpin 38s linear infinite reverse;
   }
+
   .orbit-ring-fast {
     transform-origin: 80px 80px;
     animation: orbitSpin 26s linear infinite;
@@ -346,13 +352,25 @@
 }
 
 @keyframes orbitSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes orbitPulse {
-  0%, 100% { opacity: 0.35; }
-  50%      { opacity: 0.12; }
+
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 0.12;
+  }
 }
 
 // ── DESKTOP: rail lateral fijo + snap por sección ─
@@ -431,7 +449,7 @@
       border-radius: 6px;
       position: relative;
       z-index: 1;
-      
+
       .bar {
         display: none;
       }
