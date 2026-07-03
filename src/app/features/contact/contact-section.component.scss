@@ -181,6 +181,16 @@
   gap: 16px;
 }
 
+// Honeypot anti-spam: fuera de pantalla, no display:none (algunos bots
+// lo detectan y evitan llenarlo). Invisible e inalcanzable por teclado.
+.field--hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .field {
   display: flex;
   flex-direction: column;

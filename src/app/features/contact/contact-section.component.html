@@ -77,6 +77,13 @@
     </div>
     } @else {
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" novalidate>
+      <!-- Honeypot anti-spam: oculto para personas, visible para bots que
+           autocompletan formularios. No quitar ni mostrar. -->
+      <div class="field field--hp" aria-hidden="true">
+        <label for="website">Website</label>
+        <input id="website" type="text" formControlName="website" tabindex="-1" autocomplete="off">
+      </div>
+
       <div class="field" [class.field--error]="isInvalid('name')">
         <label for="name" class="mono-label">{{ 'form.name' | t }}</label>
         <input id="name" type="text" formControlName="name" [placeholder]="'form.namePh' | t" autocomplete="name">

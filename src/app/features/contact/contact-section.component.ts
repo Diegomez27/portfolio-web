@@ -58,6 +58,10 @@ export class ContactSectionComponent {
     email: ['', [Validators.required, Validators.email]],
     projectType: ['', Validators.required],
     message: ['', [Validators.required, Validators.minLength(20)]],
+    // Honeypot anti-spam: campo sin validadores, oculto visualmente en el
+    // template. Un humano nunca lo llena; un bot que autocompleta todo el
+    // formulario sí. Ver ContactController.create en portfolio-api.
+    website: [''],
   });
 
   readonly projectTypes: ProjectType[] = [
@@ -116,12 +120,13 @@ export class ContactSectionComponent {
 
     this.formState.set('submitting');
 
-    const { name, email, projectType, message } = this.form.getRawValue();
+    const { name, email, projectType, message, website } = this.form.getRawValue();
     const payload: ContactPayload = {
       name: name ?? '',
       email: email ?? '',
       projectType: projectType ?? '',
       message: message ?? '',
+      website: website ?? '',
     };
 
     this.contactService.send(payload).subscribe({

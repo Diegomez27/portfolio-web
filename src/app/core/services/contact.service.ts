@@ -8,6 +8,8 @@ export interface ContactPayload {
   email: string;
   projectType: string;
   message: string;
+  /** Honeypot anti-spam — debe llegar vacío desde un envío humano real. */
+  website?: string;
 }
 
 export interface ContactResponse {
