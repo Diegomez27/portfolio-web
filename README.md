@@ -4,9 +4,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6.svg?logo=typescript)](https://www.typescriptlang.org/)
 [![NestJS](https://img.shields.io/badge/NestJS-Compatible-E0234E.svg?logo=nestjs)](https://nestjs.com/)
 
-Este repositorio contiene la aplicación frontend del portafolio web personal de **Diego Gómez**.
+Este repositorio contiene la aplicación frontend del sitio de **Diego Gómez** — desarrollador full-stack (Angular + NestJS).
 
-El portafolio sirve no solo como carta de presentación, sino también como demostración interactiva de habilidades frontend avanzadas (animaciones sutiles, canvas interactivos, gestión de estados con Signals, soporte bilingüe e integración fluida de temas) y para conseguir clientes potenciales, mediante formularios y comunicación directa.
+Más que un portafolio estático, el sitio funciona como herramienta de captación de clientes freelance: combina una demostración interactiva de habilidades frontend avanzadas (animaciones sutiles, canvas interactivos, gestión de estados con Signals, soporte bilingüe e integración fluida de temas) con un catálogo de demos full-stack en vivo, cada una en su propio subdominio, y un formulario de contacto directo.
 
 ---
 
@@ -17,6 +17,7 @@ El portafolio sirve no solo como carta de presentación, sino también como demo
 3. [Estructura del Proyecto](#estructura-del-proyecto)
 4. [Configuración y Desarrollo](#configuración-y-desarrollo)
 5. [Arquitectura y Flujo de Datos](#arquitectura-y-flujo-de-datos)
+6. [Despliegue en Producción](#despliegue-en-producción)
 
 
 ## Características Clave
@@ -41,6 +42,16 @@ En pantallas grandes, el scroll vertical del sitio se bloquea/intercepta parcial
 *   **Revelado Progresivo (`appReveal`):** Entrada escalonada (staggered animation) de elementos cuando entran al viewport mediante `IntersectionObserver`.
 *   **Cursor Personalizado (`appCursorRing`):** Un anillo sutil que sigue con un retraso orgánico al puntero del mouse en pantallas de escritorio.
 
+### 6. Catálogo de Demos en Vivo
+La sección "Trabajo" (`features/demos`) muestra un catálogo de demos full-stack construidas con el mismo stack (Angular + NestJS), cada una desplegada en su propio subdominio del dominio principal.
+Sirven como evidencia funcional de las categorías de servicio que ofrece el sitio: presencia web, sistemas a la medida y apps en tiempo real.
+
+| Demo | Sitio en vivo | Repositorio |
+|------|----------------|--------------|
+| Café | [cafeteria.diego-gomez-desarrollo-web.com](https://cafeteria.diego-gomez-desarrollo-web.com/) | [github.com/Diegomez27/demo-cafeteria](https://github.com/Diegomez27/demo-cafeteria) |
+| Barbería | [barber.diego-gomez-desarrollo-web.com](https://barber.diego-gomez-desarrollo-web.com/) | [github.com/Diegomez27/demo-barber](https://github.com/Diegomez27/demo-barber) |
+| Consultorio | [consultorio.diego-gomez-desarrollo-web.com](https://consultorio.diego-gomez-desarrollo-web.com/) | [github.com/Diegomez27/demo-consultorio](https://github.com/Diegomez27/demo-consultorio) |
+
 ---
 
 ## Stack Tecnológico
@@ -48,8 +59,8 @@ En pantallas grandes, el scroll vertical del sitio se bloquea/intercepta parcial
 El proyecto está construido sobre:
 *   **Framework:** [Angular v20](https://angular.dev/) (Standalone Components, Signals, dynamic effects).
 *   **Estilos:** [SCSS / SASS](https://sass-lang.com/) con tokens CSS flexibles y funciones de color modernas como `color-mix()` de la especificación CSS.
-*   **Gestión de Estados Asíncronos:** [@tanstack/angular-query-experimental](https://tanstack.com/query/latest/docs/framework/angular/overview) para queries, caché y optimizaciones en la comunicación asíncrona.
-*   **API Client:** `HttpClient` nativo estructurado para el envío de formularios.
+*   **API Client:** `HttpClient` nativo estructurado para el envío de formularios (por ejemplo `ContactService`).
+*   **Gestión de Estados Asíncronos:** [@tanstack/angular-query-experimental](https://tanstack.com/query/latest/docs/framework/angular/overview) está provisionado globalmente en `app.config.ts` (`QueryClient` + `provideAngularQuery`) para futuras queries con caché, pero ningún componente lo consume todavía — toda la comunicación actual (formulario de contacto) pasa por `HttpClient` directo.
 *   **Calidad de Código:** ESLint configurado bajo las directivas de `@angular-eslint`.
 
 ---
@@ -161,5 +172,17 @@ npm run test
 El sitio se conecta a un backend dedicado para procesar y enviar el formulario de contacto.
 *   **Endpoint de Desarrollo:** `http://localhost:3000/contact` (configurado en `environment.ts`).
 Al rellenar el formulario de contacto, los inputs se validan de forma reactiva (mínimo de caracteres, formato de correo) y se envían asíncronamente con un estado visual de carga (`idle` -> `submitting` -> `success` / `error`).
+
+---
+
+## Despliegue en Producción
+
+*   **Sitio:** [diego-gomez-desarrollo-web.com](https://diego-gomez-desarrollo-web.com) — desplegado en **Vercel**, dominio propio con DNS en Cloudflare (solo registrador/DNS, sin proxy ni CDN sobre este sitio).
+*   **API (`portfolio-api`):** desplegada en **Railway**; `CORS_ORIGIN` apunta al dominio de producción de arriba.
+*   **Formulario de contacto:** envío de correo vía **Resend**, con dominio de envío verificado (`hola@diego-gomez-desarrollo-web.com`).
+*   **Analytics:** Cloudflare Web Analytics (snippet manual en `src/index.html`, ya que el dominio corre en modo DNS-only).
+*   **Demos:** cada demo del catálogo vive en su propio subdominio del dominio de producción (ver sección de [Catálogo de Demos en Vivo](#6-catálogo-de-demos-en-vivo)).
+
+Detalle completo de infraestructura, DNS y variables de entorno en `DEPLOY_SETUP.md` (raíz del monorepo).
 
 ---
