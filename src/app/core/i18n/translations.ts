@@ -36,11 +36,14 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'demo.barber.desc': 'Sitio web para barbería.',
     'demo.consultorio.title': 'Consultorio',
     'demo.consultorio.desc': 'Sitio web para consultorio médico o dental.',
+    'demo.inventario.title': 'Control de Inventario',
+    'demo.inventario.desc': 'Sistema de gestión de inventarios con control de stock, movimientos y alertas de reabastecimiento.',
     'demo.category.landing': 'Presencia web',
     'demo.category.sistema': 'Sistema a la medida',
     'demo.category.tiempo-real': 'Tiempo real',
     'demo.category.integración': 'Integración',
     'demo.cta': 'Ver demo en vivo',
+    'demo.swipeHint': 'Desliza para explorar',
 
     // Servicios
     'services.kicker': '/ Servicios',
@@ -128,11 +131,14 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'demo.barber.desc': 'Website for a barbershop.',
     'demo.consultorio.title': 'Consultorio',
     'demo.consultorio.desc': 'Website for a medical or dental clinic.',
+    'demo.inventario.title': 'Inventory Management',
+    'demo.inventario.desc': 'Inventory management system with stock control, transactional movements, and replenishment alerts (multi-role).',
     'demo.category.landing': 'Web presence',
     'demo.category.sistema': 'Custom system',
     'demo.category.tiempo-real': 'Real-time',
     'demo.category.integración': 'Integration',
     'demo.cta': 'See live demo',
+    'demo.swipeHint': 'Swipe to explore',
 
     // Services
     'services.kicker': '/ Services',

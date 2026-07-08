@@ -12,6 +12,20 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.work__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.work__title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .work__kicker { color: var(--accent-text); }
 .work__title { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
 .work__lead {
@@ -29,16 +43,95 @@
   border-left: 2px solid var(--accent-line);
 }
 
-// ── Grid de demos ───────────────────────────────
-.demos {
-  display: grid;
-  // auto-fill (no auto-fit): con un solo card NO lo estira a todo el ancho,
-  // lo deja a su ancho de columna. min(100%, 340px) → 1 columna en móvil.
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+// ── Carrusel Container ──────────────────────────
+.demos-carousel {
+  position: relative;
+  width: 100%;
+}
+
+// ── Botones de Navegación Overlay (Desktop) ─────
+.carousel-overlay-btn {
+  display: none; // Ocultos en móvil por defecto
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-line);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--accent-text);
+  cursor: pointer;
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease, 
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.25s ease, 
+              color 0.25s ease, 
+              border-color 0.25s ease;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  &--prev {
+    left: -26px;
+  }
+
+  &--next {
+    right: -26px;
+  }
+
+  &:hover:not(.hidden) {
+    background: var(--accent-text);
+    border-color: var(--accent-text);
+    color: var(--bg);
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.4);
+  }
+
+  &:active:not(.hidden) {
+    transform: translateY(-50%) scale(0.96);
+  }
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.9);
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-overlay-btn {
+    display: inline-flex; // Se muestran sólo en resoluciones grandes
+  }
+}
+
+// ── Carrusel Track ──────────────────────────────
+.demos-track {
+  display: flex;
   gap: 22px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 12px;
+  padding-inline: 4px;
+  
+  // Ocultar scrollbar
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
 }
 
 .demo {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   background: var(--panel);
@@ -62,6 +155,18 @@
     .arrow {
       transform: translate(3px, -3px);
     }
+  }
+}
+
+@media (min-width: 640px) {
+  .demo {
+    flex: 0 0 calc(50% - 11px); // 2 columnas en tablet
+  }
+}
+
+@media (min-width: 1024px) {
+  .demo {
+    flex: 0 0 calc(33.333% - 15px); // 3 columnas en desktop
   }
 }
 
@@ -139,5 +244,89 @@
   .arrow {
     display: inline-block;
     transition: transform var(--transition);
+  }
+}
+
+// ── Indicador Deslizar (Móvil) ──────────────────
+.carousel-swipe-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  transition: opacity 0.4s ease, 
+              transform 0.4s ease, 
+              height 0.4s ease, 
+              margin-top 0.4s ease;
+
+  .mono-label {
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+  }
+
+  .swipe-arrow-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--accent-text);
+    animation: swipeArrowAnimation 1.6s ease-in-out infinite;
+  }
+
+  &.hidden {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    height: 0;
+    margin-top: 0;
+    overflow: hidden;
+  }
+}
+
+@keyframes swipeArrowAnimation {
+  0% {
+    transform: translateX(-4px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-4px);
+    opacity: 0.3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-swipe-hint {
+    display: none; // Oculto completamente en PC
+  }
+}
+
+// ── Puntos de paginación (Dots) ──────────────────
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: var(--line);
+  cursor: pointer;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.active {
+    width: 22px; // Se ensancha a píldora activa
+    border-radius: var(--radius-pill);
+    background: var(--accent-text);
   }
 }

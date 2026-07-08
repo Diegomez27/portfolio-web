@@ -1,46 +1,99 @@
 <div class="work">
   <header class="work__head">
-    <span class="work__kicker mono-label">{{ 'work.kicker' | t }}</span>
-    <h2 class="work__title">{{ 'work.title' | t }}</h2>
+    <div class="work__title-row">
+      <div class="work__title-group">
+        <span class="work__kicker mono-label">{{ 'work.kicker' | t }}</span>
+        <h2 class="work__title">{{ 'work.title' | t }}</h2>
+      </div>
+    </div>
+
     <p class="work__lead" [innerHTML]="'work.lead' | t"></p>
     <p class="work__disclaimer mono-label">{{ 'work.disclaimer' | t }}</p>
   </header>
 
-  <div class="demos" [appReveal]="120">
-    @for (demo of demos; track demo.id) {
-      <a
-        class="demo"
-        [href]="demo.url"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div class="demo__media">
-          <img
-            class="demo__img"
-            [src]="demo.imgUrl"
-            [alt]="demo.titleKey | t"
-            loading="lazy"
-          />
-          <span class="demo__badge mono-label">
-            {{ categoryKey[demo.category] | t }}
-          </span>
-        </div>
+  <!-- CONTENEDOR DEL CARRUSEL -->
+  <div class="demos-carousel">
+    <!-- BOTÓN OVERLAY IZQUIERDO (PC) -->
+    <button
+      class="carousel-overlay-btn carousel-overlay-btn--prev"
+      (click)="scrollPrev(track)"
+      [class.hidden]="isAtStart"
+      aria-label="Demo anterior"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
 
-        <div class="demo__body">
-          <h3 class="demo__title">{{ demo.titleKey | t }}</h3>
-          <p class="demo__desc">{{ demo.descKey | t }}</p>
+    <div class="demos-track" #track (scroll)="onScroll($event)" [appReveal]="120">
+      @for (demo of demos; track demo.id) {
+        <a
+          class="demo"
+          [href]="demo.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="demo__media">
+            <img
+              class="demo__img"
+              [src]="demo.imgUrl"
+              [alt]="demo.titleKey | t"
+              loading="lazy"
+            />
+            <span class="demo__badge mono-label">
+              {{ categoryKey[demo.category] | t }}
+            </span>
+          </div>
 
-          <ul class="demo__tags">
-            @for (tag of demo.tags; track tag) {
-              <li class="demo__tag">{{ tag }}</li>
-            }
-          </ul>
+          <div class="demo__body">
+            <h3 class="demo__title">{{ demo.titleKey | t }}</h3>
+            <p class="demo__desc">{{ demo.descKey | t }}</p>
 
-          <span class="demo__cta">
-            {{ 'demo.cta' | t }} <span class="arrow">↗</span>
-          </span>
-        </div>
-      </a>
-    }
+            <ul class="demo__tags">
+              @for (tag of demo.tags; track tag) {
+                <li class="demo__tag">{{ tag }}</li>
+              }
+            </ul>
+
+            <span class="demo__cta">
+              {{ 'demo.cta' | t }} <span class="arrow">↗</span>
+            </span>
+          </div>
+        </a>
+      }
+    </div>
+
+    <!-- BOTÓN OVERLAY DERECHO (PC) -->
+    <button
+      class="carousel-overlay-btn carousel-overlay-btn--next"
+      (click)="scrollNext(track)"
+      [class.hidden]="isAtEnd"
+      aria-label="Demo siguiente"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+
+    <!-- INDICADOR DE DESLIZAR (SÓLO MÓVIL) -->
+    <div class="carousel-swipe-hint" [class.hidden]="!showSwipeHint">
+      <span class="mono-label">{{ 'demo.swipeHint' | t }}</span>
+      <svg class="swipe-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </div>
+
+    <!-- PUNTOS DE PAGINACIÓN -->
+    <div class="carousel-dots">
+      @for (demo of demos; track demo.id; let idx = $index) {
+        <button
+          class="carousel-dot"
+          [class.active]="activeIndex === idx"
+          (click)="scrollToIndex(track, idx)"
+          [attr.aria-label]="'Ir a demo ' + (idx + 1)"
+        ></button>
+      }
+    </div>
   </div>
 </div>

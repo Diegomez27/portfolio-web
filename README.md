@@ -51,6 +51,7 @@ Sirven como evidencia funcional de las categorías de servicio que ofrece el sit
 | Café | [cafeteria.diego-gomez-desarrollo-web.com](https://cafeteria.diego-gomez-desarrollo-web.com/) | [github.com/Diegomez27/demo-cafeteria](https://github.com/Diegomez27/demo-cafeteria) |
 | Barbería | [barber.diego-gomez-desarrollo-web.com](https://barber.diego-gomez-desarrollo-web.com/) | [github.com/Diegomez27/demo-barber](https://github.com/Diegomez27/demo-barber) |
 | Consultorio | [consultorio.diego-gomez-desarrollo-web.com](https://consultorio.diego-gomez-desarrollo-web.com/) | [github.com/Diegomez27/demo-consultorio](https://github.com/Diegomez27/demo-consultorio) |
+| Inventario | [inventario.diego-gomez-desarrollo-web.com](https://inventario.diego-gomez-desarrollo-web.com/) |
 
 ---
 

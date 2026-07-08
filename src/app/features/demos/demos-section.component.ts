@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 interface Demo {
@@ -20,7 +20,7 @@ import { RevealDirective } from '../../shared/directives/reveal.directive';
   templateUrl: './demos-section.component.html',
   styleUrl: './demos-section.component.scss',
 })
-export class DemosSectionComponent {
+export class DemosSectionComponent implements AfterViewInit {
   readonly demos: Demo[] = [
     {
       id: 'cafe',
@@ -52,6 +52,16 @@ export class DemosSectionComponent {
       imgUrl:
         'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80',
     },
+    {
+      id: 'inventario',
+      titleKey: 'demo.inventario.title',
+      descKey: 'demo.inventario.desc',
+      category: 'sistema',
+      tags: ['Angular 20', 'NestJS', 'PostgreSQL', 'JWT Auth'],
+      url: 'https://inventario.diego-gomez-desarrollo-web.com/',
+      imgUrl:
+        'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
+    },
   ];
 
   readonly categoryKey: Record<Demo['category'], string> = {
@@ -60,4 +70,65 @@ export class DemosSectionComponent {
     'tiempo-real': 'demo.category.tiempo-real',
     integración: 'demo.category.integración',
   };
+
+  @ViewChild('track') trackElement!: ElementRef<HTMLElement>;
+
+  isAtStart = true;
+  isAtEnd = false;
+  activeIndex = 0;
+  showSwipeHint = true;
+
+  ngAfterViewInit(): void {
+    // Wait for initial layout rendering
+    setTimeout(() => {
+      if (this.trackElement) {
+        this.updateScrollState(this.trackElement.nativeElement);
+      }
+    }, 150);
+  }
+
+  updateScrollState(track: HTMLElement): void {
+    const tolerance = 10;
+    this.isAtStart = track.scrollLeft <= tolerance;
+    this.isAtEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - tolerance;
+
+    // Calculate active slide index
+    const card = track.firstElementChild as HTMLElement;
+    if (card) {
+      const cardWidth = card.offsetWidth + 22; // width + gap
+      this.activeIndex = Math.round(track.scrollLeft / cardWidth);
+    }
+  }
+
+  onScroll(event: Event): void {
+    const track = event.target as HTMLElement;
+    this.updateScrollState(track);
+    if (track.scrollLeft > 20) {
+      this.showSwipeHint = false;
+    }
+  }
+
+  scrollNext(track: HTMLElement): void {
+    const card = track.firstElementChild as HTMLElement;
+    if (card) {
+      const cardWidth = card.offsetWidth + 22;
+      track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    }
+  }
+
+  scrollPrev(track: HTMLElement): void {
+    const card = track.firstElementChild as HTMLElement;
+    if (card) {
+      const cardWidth = card.offsetWidth + 22;
+      track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    }
+  }
+
+  scrollToIndex(track: HTMLElement, index: number): void {
+    const card = track.firstElementChild as HTMLElement;
+    if (card) {
+      const cardWidth = card.offsetWidth + 22;
+      track.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+    }
+  }
 }
