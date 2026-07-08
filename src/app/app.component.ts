@@ -35,6 +35,8 @@ import { animate, stagger, createDrawable, cubicBezier, utils } from 'animejs';
 export class AppComponent implements AfterViewInit, OnDestroy {
   readonly nav = inject(ChapterService);
 
+  readonly whatsappLink = 'https://wa.me/526681448682?text=Hola%20Diego,%20me%20interesa%20cotizar%20un%20desarrollo';
+
   @ViewChild('scroller') scroller!: ElementRef<HTMLElement>;
   @ViewChild('indicator') indicatorRef?: ElementRef<HTMLElement>;
   private io?: IntersectionObserver;

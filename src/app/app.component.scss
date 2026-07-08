@@ -516,3 +516,80 @@
     }
   }
 }
+
+// ── Botón Flotante de WhatsApp (FAB) ──────────────────
+.whatsapp-fab {
+  position: fixed;
+  bottom: calc(82px + env(safe-area-inset-bottom)); // Por encima de la tabbar en móvil
+  right: 16px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  color: #1ebe5d; // Verde de WhatsApp en el ícono
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(20, 19, 15, 0.06);
+  text-decoration: none;
+  
+  // Transiciones de interacción y visibilidad reactiva
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.85);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color var(--transition), 
+              box-shadow var(--transition), 
+              background-color var(--transition);
+  
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+
+  svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
+
+  &:hover {
+    border-color: #1ebe5d;
+    background: color-mix(in srgb, #1ebe5d 4%, var(--surface));
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 6px 18px rgba(30, 190, 93, 0.15);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Ajustes para escritorio (pantallas grandes)
+@media (min-width: 1100px) {
+  .whatsapp-fab {
+    bottom: 30px; // Más abajo ya que no hay tabbar inferior
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    box-shadow: 0 4px 16px rgba(20, 19, 15, 0.08);
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      transform: translateY(-2px); // En PC solo sube, en móvil escala
+      box-shadow: 0 8px 24px rgba(30, 190, 93, 0.18);
+    }
+
+    &:active {
+      transform: scale(0.96) translateY(-1px);
+    }
+  }
+}

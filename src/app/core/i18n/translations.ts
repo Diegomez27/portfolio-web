@@ -63,6 +63,9 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'contact.tooltip.email': 'Copiar correo al portapapeles',
     'contact.tooltip.github': 'Visitar perfil de GitHub (abre pestaña nueva)',
     'contact.tooltip.linkedin': 'Visitar perfil de LinkedIn (abre pestaña nueva)',
+    'contact.tooltip.whatsapp': 'Enviar mensaje de WhatsApp (abre pestaña nueva)',
+    'contact.whatsappValue': 'Enviar mensaje',
+    'whatsapp.fabLabel': 'WhatsApp',
 
     // Formulario
     'form.name': 'Nombre',
@@ -152,6 +155,9 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     'contact.tooltip.email': 'Copy email to clipboard',
     'contact.tooltip.github': 'Visit GitHub profile (opens in new tab)',
     'contact.tooltip.linkedin': 'Visit LinkedIn profile (opens in new tab)',
+    'contact.tooltip.whatsapp': 'Send a WhatsApp message (opens in new tab)',
+    'contact.whatsappValue': 'Send message',
+    'whatsapp.fabLabel': 'WhatsApp',
 
     // Form
     'form.name': 'Name',

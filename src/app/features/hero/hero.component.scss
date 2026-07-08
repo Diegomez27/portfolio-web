@@ -62,16 +62,16 @@
 
 .hero__ctas {
   display: flex;
-  flex-wrap: nowrap;       // móvil: lado a lado, nunca apilados
-  align-self: stretch;     // conservan el ancho completo aunque el bloque vaya centrado
+  flex-wrap: nowrap;
+  justify-content: center;
   gap: 10px;
   margin-top: 4px;
 
   .btn {
-    flex: 1 1 0;           // reparten el ancho a partes iguales
-    min-width: 0;
-    white-space: normal;   // permite 2 líneas si el ancho es muy chico
-    padding-inline: 1rem;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding-inline: 1.2rem;
+    font-size: 0.9rem;
   }
 }
 

@@ -10,7 +10,7 @@ import { animate, createDrawable } from 'animejs';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
-type LinkIcon = 'email' | 'github' | 'linkedin';
+type LinkIcon = 'email' | 'github' | 'linkedin' | 'whatsapp';
 
 interface ContactLink {
   kind: string;
@@ -78,6 +78,13 @@ export class ContactSectionComponent {
       href: 'mailto:diegomez27@outlook.com',
       icon: 'email',
       tooltipKey: 'contact.tooltip.email',
+    },
+    {
+      kind: 'WhatsApp',
+      value: 'contact.whatsappValue',
+      href: 'https://wa.me/526681448682?text=Hola%20Diego,%20me%20interesa%20cotizar%20un%20desarrollo',
+      icon: 'whatsapp',
+      tooltipKey: 'contact.tooltip.whatsapp',
     },
     {
       kind: 'GitHub',
