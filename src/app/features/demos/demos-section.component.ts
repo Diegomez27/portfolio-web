@@ -23,6 +23,16 @@ import { RevealDirective } from '../../shared/directives/reveal.directive';
 export class DemosSectionComponent implements AfterViewInit {
   readonly demos: Demo[] = [
     {
+      id: 'inventario',
+      titleKey: 'demo.inventario.title',
+      descKey: 'demo.inventario.desc',
+      category: 'sistema',
+      tags: ['Angular 20', 'NestJS', 'PostgreSQL', 'JWT Auth'],
+      url: 'https://inventario.diego-gomez-desarrollo-web.com/',
+      imgUrl:
+        'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
+    },
+    {
       id: 'cafe',
       titleKey: 'demo.cafe.title',
       descKey: 'demo.cafe.desc',
@@ -51,16 +61,6 @@ export class DemosSectionComponent implements AfterViewInit {
       url: 'https://consultorio.diego-gomez-desarrollo-web.com/',
       imgUrl:
         'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-      id: 'inventario',
-      titleKey: 'demo.inventario.title',
-      descKey: 'demo.inventario.desc',
-      category: 'sistema',
-      tags: ['Angular 20', 'NestJS', 'PostgreSQL', 'JWT Auth'],
-      url: 'https://inventario.diego-gomez-desarrollo-web.com/',
-      imgUrl:
-        'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
     },
   ];
 
